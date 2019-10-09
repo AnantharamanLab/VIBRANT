@@ -1,0 +1,4 @@
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome
+NC_001331.1 Pseudomonas phage Pf1, complete genome
+MH552510.2 Microviridae sp. isolate ctch16, complete genome

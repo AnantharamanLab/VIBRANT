@@ -1,0 +1,5 @@
+scaffold	total genes	all KEGG	KEGG v-score	all Pfam	Pfam v-score	all VOG	VOG v-score	KEGG int-rep	KEGG zero	Pfam int-rep	Pfam zero	VOG redoxin	VOG rec-tran	VOG int	VOG RnR	VOG DNA	KEGG restriction check	KEGG toxin check	VOG special	annotation check	p_v check	p_k check	k_v check	k check	p check	v check	h check
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome	87.0	6.0	15.48	7.0	11.470000000000002	15.0	61.050000000000004	0.0	1.0	0.0	0.0	0.0	0.0	0.0	1.0	3.0	0.0	0.0	0.0	4.0	2.0	0.0	1.0	1.0	1.0	8.0	70.0
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome	38.0	0.0	0.0	0.0	0.0	7.0	3.7199999999999998	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	1.0	0.0	0.0	0.0	0.0	0.0	0.0	7.0	31.0
+NC_001331.1 Pseudomonas phage Pf1, complete genome	13.0	1.0	0.84	3.0	1.79	2.0	1.78	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	1.0	0.0	0.0	0.0	0.0	2.0	1.0	9.0
+MH552510.2 Microviridae sp. isolate ctch16, complete genome	6.0	0.0	0.0	1.0	10.0	2.0	20.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	1.0	0.0	1.0	0.0	0.0	0.0	0.0	1.0	4.0

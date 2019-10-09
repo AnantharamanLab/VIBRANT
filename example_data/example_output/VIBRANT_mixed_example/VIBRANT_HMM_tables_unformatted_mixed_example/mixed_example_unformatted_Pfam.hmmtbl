@@ -1,0 +1,36 @@
+#                                                               --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_36 -          AAA_19               PF13245.6    2.7e-15   50.4   0.0   5.5e-15   49.3   0.0   1.5   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_36 -          AAA_30               PF13604.6    1.9e-23   76.5   0.0   2.9e-23   75.9   0.0   1.2   1   0   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_2 -          AAA_31               PF13614.6      1e-45  149.1   1.1   1.2e-45  148.9   0.2   1.4   2   0   0   2   2   2   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_87 -          ART-PolyVal          PF18760.1    7.4e-19   62.5   3.1   7.4e-19   62.5   3.1   3.8   3   0   0   3   3   3   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_2 -          CbiA                 PF01656.23   3.2e-26   85.2   0.0   5.6e-26   84.5   0.0   1.4   1   1   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_2 -          CBP_BcsQ             PF06564.12   2.1e-17   56.7   0.0   4.8e-17   55.5   0.0   1.5   1   1   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_4 -          Chlam_vir            PF05475.11   1.6e-88  287.3   3.4   2.9e-88  286.5   3.4   1.4   1   0   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_6 -          DnaB                 PF00772.21   6.6e-15   48.5   2.2   1.1e-14   47.7   0.9   2.0   2   0   0   2   2   2   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_6 -          DnaB_C               PF03796.15   7.9e-85  277.5   0.2   1.1e-84  277.1   0.2   1.2   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_23 -          DNA_ligase_A_M       PF01068.21   5.9e-13   42.2   0.0   1.9e-12   40.6   0.0   1.8   1   1   0   1   1   1   1 -
+NC_001331.1$~&Pseudomonas$~&phage$~&Pf1,$~&complete$~&genome_12 -          DUF5447              PF17525.2    1.4e-48  156.7   8.2   1.5e-48  156.6   8.2   1.0   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_11 -          DUF932               PF06067.11   4.9e-50  163.7   0.0   6.6e-50  163.3   0.0   1.1   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_10 -          dUTPase              PF00692.19   1.3e-18   60.3   0.0   2.2e-18   59.6   0.0   1.3   1   1   0   1   1   1   1 -
+NZ_CP036309.1$~&Klebsiella$~&pneumoniae$~&strain$~&WCHKP020098$~&plasmid$~&p3_020098,$~&complete$~&sequence_8 -          MobC                 PF05713.11   4.7e-17   55.6   1.4   8.3e-17   54.8   1.4   1.4   1   0   0   1   1   1   1 -
+NZ_CP036309.1$~&Klebsiella$~&pneumoniae$~&strain$~&WCHKP020098$~&plasmid$~&p3_020098,$~&complete$~&sequence_3 -          ParE_toxin           PF05016.15   1.9e-16   53.8   0.3   2.2e-16   53.7   0.3   1.0   1   0   0   1   1   1   1 -
+NC_001331.1$~&Pseudomonas$~&phage$~&Pf1,$~&complete$~&genome_4 -          Phage_Coat_B         PF05356.11   9.6e-55  175.9   3.3   1.1e-54  175.8   3.3   1.0   1   0   0   1   1   1   1 -
+MH552510.2$~&Microviridae$~&sp.$~&isolate$~&ctch16,$~&complete$~&genome_1 -          Phage_F              PF02305.17   2.4e-20   66.0   1.4   2.4e-13   42.9   0.1   2.2   2   0   0   2   2   2   2 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_7 -          Phage_integrase      PF00589.22   2.1e-19   63.3   0.0   4.5e-19   62.2   0.0   1.5   1   0   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_8 -          Phage_integrase      PF00589.22     1e-12   41.6   0.0   1.6e-12   40.9   0.0   1.3   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_12 -          Sipho_Gp157          PF05565.11   3.3e-18   59.6   4.5   3.3e-18   59.6   4.5   2.2   2   1   0   2   2   2   2 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_16 -          Thy1                 PF02511.15   1.2e-17   57.7   1.2     1e-11   38.3   0.0   2.4   1   1   1   2   2   2   2 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_1 -          UPF0137              PF03677.13     8e-77  251.5   8.8   9.2e-77  251.3   8.8   1.0   1   0   0   1   1   1   1 -
+NC_001331.1$~&Pseudomonas$~&phage$~&Pf1,$~&complete$~&genome_7 -          Zot                  PF05707.12   8.3e-59  191.8   0.0     1e-58  191.5   0.0   1.1   1   0   0   1   1   1   1 -
+#
+# Program:         hmmsearch
+# Version:         3.2.1 (June 2018)
+# Pipeline mode:   SEARCH
+# Query file:      /Users/kristopher/Documents/Lab/Virus_programs/VIBRANT_v1.0.0/databases/Pfam-A_v32.HMM
+# Target file:     mixed_example.parallel-runs_aa.appended.faa
+# Option settings: hmmsearch -o mixed_example.parallel-runs_aa_temp.txt --tblout mixed_example.parallel-runs_aa.Pfam.hmmtbl --noali -T 40 --cpu 1 /Users/kristopher/Documents/Lab/Virus_programs/VIBRANT_v1.0.0/databases/Pfam-A_v32.HMM mixed_example.parallel-runs_aa.appended.faa 
+# Current dir:     /Users/kristopher/Documents/Lab/Virus_programs/VIBRANT_v1.0.0/example_data
+# Date:            Wed Oct  9 10:56:54 2019
+# [ok]

@@ -1,0 +1,145 @@
+protein	scaffold	KO	AMG	KO name	KO evalue	KO score	KO v-score	Pfam	Pfam name	Pfam evalue	Pfam score	Pfam v-score	VOG	VOG name	VOG evalue	VOG score	VOG v-score
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_1	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_2	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_3	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_4	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_5	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_6	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_7	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_8	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome												VOG01648	REFSEQ hypothetical protein	1.6000000000000002e-19	64.2	1.49
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_9	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_10	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome	K01520		"dut, DUT; dUTP pyrophosphatase [EC:3.6.1.23]"	8.299999999999999e-39	127.3	2.79	PF00692.19	dUTPase	1.3000000000000002e-18	60.3	2.5	VOG00080	"sp|P33316|DUT_HUMAN Deoxyuridine 5'-triphosphate nucleotidohydrolase, mitochondrial"	3.2e-37	121.0	10.0
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_11	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome							PF06067.11	Domain of unknown function (DUF932)	4.9e-50	163.7	0.73	VOG10569	REFSEQ hypothetical protein	8e-49	159.9	2.97
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_12	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome							PF05565.11	Siphovirus Gp157	3.3e-18	59.6	1.0	VOG11084	REFSEQ hypothetical protein	4.6e-15	49.2	3.79
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_13	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_14	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_15	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_16	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome	K03465		"thyX, thy1; thymidylate synthase (FAD) [EC:2.1.1.148]"	4.0000000000000004e-21	69.1	4.3	PF02511.15	Thymidylate synthase complementing protein	1.2e-17	57.7	4.14	VOG00715	sp|Q05259|THYX_BPML5 Probable flavin-dependent thymidylate synthase	1.3999999999999999e-18	60.8	10.0
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_17	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_18	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_19	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_20	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_21	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_22	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_23	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome	K10747		LIG1; DNA ligase 1 [EC:6.5.1.1 6.5.1.6 6.5.1.7]	2.3999999999999997e-19	63.4	4.71	PF01068.21	ATP dependent DNA ligase domain	5.9e-13	42.2	1.8	VOG00079	sp|P00970|DNLI_BPT4 DNA ligase	4e-35	114.9	10.0
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_24	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_25	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome												VOG06175	REFSEQ hypothetical protein	1.9999999999999996e-67	221.2	0.2
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_26	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_27	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_28	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_29	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_30	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome	K02319		"pol; DNA polymerase, archaea type [EC:2.7.7.7]"	1.1000000000000001e-18	60.2	2.28						VOG00674	REFSEQ putative DNA polymerase	8.999999999999998e-137	450.3	3.61
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_31	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_32	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_33	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_34	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_35	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_36	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome	K01144		E3.1.11.5; exodeoxyribonuclease V [EC:3.1.11.5]	4.2999999999999995e-42	138.3	1.4	PF13604.6	AAA domain	1.9e-23	76.5	1.24	VOG00084	sp|P32270|DDA_BPT4 ATP-dependent DNA helicase dda	1.2e-47	156.5	10.0
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_37	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_38	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_39	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome	K01771	AMG	plc; 1-phosphatidylinositol phosphodiesterase [EC:4.6.1.13]	4.2e-13	42.3	0										
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_40	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_41	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_42	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_43	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_44	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_45	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_46	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_47	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_48	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_49	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_50	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_51	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_52	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_53	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome												VOG01402	REFSEQ hypothetical protein	8.399999999999999e-40	130.1	6.56
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_54	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome												VOG21413	REFSEQ hypothetical protein	7.099999999999999e-13	41.9	0.05
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_55	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_56	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_57	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome												VOG02422	REFSEQ hypothetical protein	1.0999999999999999e-179	592.4	0.32
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_58	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome												VOG00377	REFSEQ hypothetical protein	1.9e-15	50.2	1.57
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_59	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome												VOG06177	REFSEQ hypothetical protein	1.9999999999999995e-151	499.0	0.28
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_60	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_61	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome												VOG06176	REFSEQ hypothetical protein	1.3999999999999996e-155	511.8	0.21
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_62	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_63	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_64	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_65	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_66	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_67	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_68	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_69	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_70	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_71	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_72	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_73	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_74	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_75	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_76	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_77	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_78	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_79	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_80	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_81	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_82	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_83	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_84	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_85	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_86	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome																
+MH552500.1 CrAssphage sp. isolate ctcc615, complete genome_87	MH552500.1 CrAssphage sp. isolate ctcc615, complete genome							PF18760.1	ADP-Ribosyltransferase in polyvalent proteins	7.4e-19	62.5	0.06					
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_1	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_2	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_3	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_4	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_5	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_6	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_7	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_8	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_9	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_10	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_11	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_12	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_13	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome												VOG08505	REFSEQ putative DNA-binding protein	9.6e-34	109.3	0.07
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_14	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_15	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_16	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome												VOG18842	REFSEQ hypothetical protein	2.3e-30	98.9	0.23
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_17	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_18	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_19	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_20	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome												VOG15385	sp|Q8QL25|Y562_SIRV1 Uncharacterized protein 562	3.3e-13	42.6	0.39
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_21	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_22	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_23	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome												VOG00136	sp|Q8QL34|Y335_SIRV1 Uncharacterized glycosyltransferase 335	2.6e-68	224.1	2.0
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_24	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome												VOG09119	REFSEQ hypothetical protein	3.5999999999999995e-63	203.8	0.03
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_25	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome												VOG15393	sp|Q8QL23|Y158B_SIRV1 Uncharacterized protein 158B	3.7e-51	166.3	0.5
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_26	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_27	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_28	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_29	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_30	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_31	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_32	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_33	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_34	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_35	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_36	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome												VOG09120	REFSEQ structural protein c137	3.9999999999999993e-106	345.9	0.5
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_37	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome_38	MK064567.1 Sulfolobus polyhedral virus 2 clone F, complete genome																
+NC_001331.1 Pseudomonas phage Pf1, complete genome_1	NC_001331.1 Pseudomonas phage Pf1, complete genome																
+NC_001331.1 Pseudomonas phage Pf1, complete genome_2	NC_001331.1 Pseudomonas phage Pf1, complete genome																
+NC_001331.1 Pseudomonas phage Pf1, complete genome_3	NC_001331.1 Pseudomonas phage Pf1, complete genome																
+NC_001331.1 Pseudomonas phage Pf1, complete genome_4	NC_001331.1 Pseudomonas phage Pf1, complete genome							PF05356.11	Phage Coat protein B	9.599999999999998e-55	175.9	1.0					
+NC_001331.1 Pseudomonas phage Pf1, complete genome_5	NC_001331.1 Pseudomonas phage Pf1, complete genome																
+NC_001331.1 Pseudomonas phage Pf1, complete genome_6	NC_001331.1 Pseudomonas phage Pf1, complete genome												VOG12266	REFSEQ hypothetical protein	2.7000000000000002e-12	40.5	0.11
+NC_001331.1 Pseudomonas phage Pf1, complete genome_7	NC_001331.1 Pseudomonas phage Pf1, complete genome	K10954		zot; zona occludens toxin	1.1999999999999999e-28	94.0	0.84	PF05707.12	Zonular occludens toxin (Zot)	8.299999999999999e-59	191.8	0.77	VOG10142	sp|O55247|G1P_BPPHL Gene 1 protein	8.899999999999999e-88	288.3	1.67
+NC_001331.1 Pseudomonas phage Pf1, complete genome_8	NC_001331.1 Pseudomonas phage Pf1, complete genome																
+NC_001331.1 Pseudomonas phage Pf1, complete genome_9	NC_001331.1 Pseudomonas phage Pf1, complete genome																
+NC_001331.1 Pseudomonas phage Pf1, complete genome_10	NC_001331.1 Pseudomonas phage Pf1, complete genome																
+NC_001331.1 Pseudomonas phage Pf1, complete genome_11	NC_001331.1 Pseudomonas phage Pf1, complete genome																
+NC_001331.1 Pseudomonas phage Pf1, complete genome_12	NC_001331.1 Pseudomonas phage Pf1, complete genome							PF17525.2	Family of unknown function (DUF5447)	1.3999999999999997e-48	156.7	0.02					
+NC_001331.1 Pseudomonas phage Pf1, complete genome_13	NC_001331.1 Pseudomonas phage Pf1, complete genome																
+MH552510.2 Microviridae sp. isolate ctch16, complete genome_1	MH552510.2 Microviridae sp. isolate ctch16, complete genome							PF02305.17	Capsid protein (F protein)	2.4e-20	66.0	10.0	VOG01646	sp|P19192|CAPSD_BPCHP Capsid protein VP1	4.9e-33	107.8	10.0
+MH552510.2 Microviridae sp. isolate ctch16, complete genome_2	MH552510.2 Microviridae sp. isolate ctch16, complete genome																
+MH552510.2 Microviridae sp. isolate ctch16, complete genome_3	MH552510.2 Microviridae sp. isolate ctch16, complete genome																
+MH552510.2 Microviridae sp. isolate ctch16, complete genome_4	MH552510.2 Microviridae sp. isolate ctch16, complete genome																
+MH552510.2 Microviridae sp. isolate ctch16, complete genome_5	MH552510.2 Microviridae sp. isolate ctch16, complete genome																
+MH552510.2 Microviridae sp. isolate ctch16, complete genome_6	MH552510.2 Microviridae sp. isolate ctch16, complete genome												VOG00821	sp|Q9G050|REP_BPPHM Replication-associated protein VP4	2.7e-23	75.8	10.0

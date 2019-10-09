@@ -1,0 +1,47 @@
+#                                                               --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_7 -          VOG00041             -            1.5e-22   73.8   0.3     2e-22   73.5   0.3   1.1   1   0   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_8 -          VOG00041             -            2.4e-16   53.5   0.0     3e-16   53.1   0.0   1.0   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_23 -          VOG00079             -              4e-35  114.9   2.3   5.2e-35  114.5   2.3   1.1   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_10 -          VOG00080             -            3.2e-37  121.0   0.0   3.6e-37  120.8   0.0   1.0   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_36 -          VOG00084             -            1.2e-47  156.5  10.3   1.4e-47  156.2  10.3   1.0   1   0   0   1   1   1   1 -
+MK064567.1$~&Sulfolobus$~&polyhedral$~&virus$~&2$~&clone$~&F,$~&complete$~&genome_23 -          VOG00136             -            2.6e-68  224.1   7.7     3e-68  223.9   7.7   1.0   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_58 -          VOG00377             -            1.9e-15   50.2   1.1   5.9e-15   48.6   1.1   1.6   1   1   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_6 -          VOG00557             -            6.5e-73  239.9   1.1   8.3e-73  239.5   1.1   1.0   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_30 -          VOG00674             -             9e-137  450.3  24.8  1.3e-136  449.8  24.8   1.1   1   0   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_6 -          VOG00709             -            3.5e-62  204.2   0.4   3.9e-62  204.1   0.4   1.2   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_16 -          VOG00715             -            1.4e-18   60.8   0.5   3.8e-17   56.2   0.5   2.2   1   1   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_6 -          VOG00815             -            9.3e-37  120.4   2.8   3.9e-36  118.3   2.8   1.7   1   1   0   1   1   1   1 -
+MH552510.2$~&Microviridae$~&sp.$~&isolate$~&ctch16,$~&complete$~&genome_6 -          VOG00821             -            2.7e-23   75.8   2.4   4.6e-23   75.1   2.4   1.3   1   0   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_6 -          VOG00895             -            1.8e-43  142.7   5.9   3.1e-43  141.9   5.9   1.3   1   1   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_53 -          VOG01402             -            8.4e-40  130.1   0.5     1e-39  129.8   0.5   1.1   1   0   0   1   1   1   1 -
+MH552510.2$~&Microviridae$~&sp.$~&isolate$~&ctch16,$~&complete$~&genome_1 -          VOG01646             -            4.9e-33  107.8  12.2   3.3e-30   98.5  12.2   2.2   1   1   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_8 -          VOG01648             -            1.6e-19   64.2   0.3   1.8e-19   64.0   0.3   1.1   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_57 -          VOG02422             -           1.1e-179  592.4  11.5  1.3e-179  592.1  11.5   1.0   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_25 -          VOG06175             -              2e-67  221.2  20.7   1.1e-57  189.1  16.6   2.0   1   1   1   2   2   2   2 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_61 -          VOG06176             -           1.4e-155  511.8   3.3  1.5e-155  511.6   3.3   1.0   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_59 -          VOG06177             -             2e-151  499.0  41.8  2.2e-151  498.9  41.8   1.0   1   0   0   1   1   1   1 -
+MK064567.1$~&Sulfolobus$~&polyhedral$~&virus$~&2$~&clone$~&F,$~&complete$~&genome_13 -          VOG08505             -            9.6e-34  109.3   1.1     1e-33  109.1   1.1   1.0   1   0   0   1   1   1   1 -
+MK064567.1$~&Sulfolobus$~&polyhedral$~&virus$~&2$~&clone$~&F,$~&complete$~&genome_24 -          VOG09119             -            3.6e-63  203.8   0.0     4e-63  203.7   0.0   1.0   1   0   0   1   1   1   1 -
+MK064567.1$~&Sulfolobus$~&polyhedral$~&virus$~&2$~&clone$~&F,$~&complete$~&genome_36 -          VOG09120             -             4e-106  345.9  16.8  4.5e-106  345.7  16.8   1.0   1   0   0   1   1   1   1 -
+NC_001331.1$~&Pseudomonas$~&phage$~&Pf1,$~&complete$~&genome_7 -          VOG10142             -            8.9e-88  288.3   0.0   9.9e-88  288.1   0.0   1.0   1   0   0   1   1   1   1 -
+CP003812.1$~&Chlamydia$~&psittaci$~&84/55$~&plasmid$~&pcp8455,$~&complete$~&sequence_2 -          VOG10286             -            3.3e-39  128.4   0.1   3.9e-39  128.1   0.1   1.1   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_11 -          VOG10569             -              8e-49  159.9   0.0   9.4e-49  159.7   0.0   1.0   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_12 -          VOG11084             -            4.6e-15   49.2   6.1   4.6e-15   49.2   6.1   2.4   2   1   0   2   2   2   2 -
+NZ_CP036309.1$~&Klebsiella$~&pneumoniae$~&strain$~&WCHKP020098$~&plasmid$~&p3_020098,$~&complete$~&sequence_3 -          VOG12122             -            7.8e-18   58.1   0.1   8.6e-18   57.9   0.1   1.0   1   0   0   1   1   1   1 -
+NC_001331.1$~&Pseudomonas$~&phage$~&Pf1,$~&complete$~&genome_6 -          VOG12266             -            2.7e-12   40.5   0.3   3.3e-12   40.3   0.3   1.1   1   0   0   1   1   1   1 -
+MK064567.1$~&Sulfolobus$~&polyhedral$~&virus$~&2$~&clone$~&F,$~&complete$~&genome_20 -          VOG15385             -            3.3e-13   42.6  17.5   1.3e-12   40.6  17.5   1.7   1   1   0   1   1   1   1 -
+MK064567.1$~&Sulfolobus$~&polyhedral$~&virus$~&2$~&clone$~&F,$~&complete$~&genome_25 -          VOG15393             -            3.7e-51  166.3   2.9   4.3e-51  166.0   2.9   1.0   1   0   0   1   1   1   1 -
+MK064567.1$~&Sulfolobus$~&polyhedral$~&virus$~&2$~&clone$~&F,$~&complete$~&genome_16 -          VOG18842             -            2.3e-30   98.9  16.0     3e-30   98.6  16.0   1.1   1   0   0   1   1   1   1 -
+MH552500.1$~&CrAssphage$~&sp.$~&isolate$~&ctcc615,$~&complete$~&genome_54 -          VOG21413             -            7.1e-13   41.9   1.5   9.9e-13   41.4   1.5   1.2   1   1   0   1   1   1   1 -
+#
+# Program:         hmmsearch
+# Version:         3.2.1 (June 2018)
+# Pipeline mode:   SEARCH
+# Query file:      /Users/kristopher/Documents/Lab/Virus_programs/VIBRANT_v1.0.0/databases/VOGDB94_phage.HMM
+# Target file:     mixed_example.parallel-runs_aa.pass.faa
+# Option settings: hmmsearch -o mixed_example.parallel-runs_aa_temp.txt --tblout mixed_example.parallel-runs_aa.VOG.hmmtbl --noali -T 40 --cpu 1 /Users/kristopher/Documents/Lab/Virus_programs/VIBRANT_v1.0.0/databases/VOGDB94_phage.HMM mixed_example.parallel-runs_aa.pass.faa 
+# Current dir:     /Users/kristopher/Documents/Lab/Virus_programs/VIBRANT_v1.0.0/example_data
+# Date:            Wed Oct  9 10:57:10 2019
+# [ok]
