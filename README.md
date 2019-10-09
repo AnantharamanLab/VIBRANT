@@ -104,7 +104,7 @@ VIBRANT is built for efficiently running on metagenomes but can also run on indi
 
 *Note:* VIBRANT does not write to standard out (command prompt screen) while running or when it finishes (i.e., not verbose). However, VIBRANT will write to standard out in the event that it encounters an error, such as incorrect use of optional arguments or incorrect input file format. See step 11 below for an example.  
 
-*Optional:* run VIBRANT on test datasets (steps 8-11).  
+*Optional:* run VIBRANT on test datasets (steps 8-11). *Note*: you may want to try using the `-t` flag to increase VIBRANT's speed. See *Arguments and Flags* section for details.  
 
 8) Test out a small dataset of mixed viral and non-viral scaffolds in nucleotide format. See `example_output/VIBRANT_mixed_example` for how the results should look.  
     `python3 ../VIBRANT_run.py -i mixed_example.fasta` from within the `example_data/` folder  
