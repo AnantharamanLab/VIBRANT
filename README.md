@@ -90,13 +90,13 @@ VIBRANT is built for efficiently running on metagenomes but can also run on indi
 *Note:* if at any time you are given a "permission denied" error you can run `chmod 777 <file_name>` or `chmod -R 777 <folder_name>`. Simply repace `<file_name>` or `<folder_name>` with the file/folder that you would like to add permissions to.
 
 1) Install dependancies. See *Requirements* section above.
-2) Download and decompress VIBRANT_v1.0.0.tar.gz  
-    `tar -xvzf VIBRANT_v1.0.0.tar.gz`  
+2) Download VIBRANT using git clone or download zip file.  *Note*: if you download the zip file you will have the parent folder `VIBRANT-master` instead of `VIBRANT`.  
+    `git clone https://github.com/KrisKieft/VIBRANT`  
 3) You may want to add permissions to all files.  
-    `chmod -R 777 VIBRANT_v1.0.0`  
-4) Move folder to desired location. VIBRANT will function no matter where the parent folder (VIBRANT_v1.0.0) is located or moved to, but hierarchy of files and folders within the parent folder must remain constant.  
+    `chmod -R 777 VIBRANT`  
+4) Move parent folder (`VIBRANT`) to desired location. VIBRANT will function no matter where the parent folder is located or moved to, but hierarchy of files and folders within the parent folder must remain constant.  
 5) Move into databases folder for setup.  
-    `cd VIBRANT_v1.0.0/databases`  
+    `cd VIBRANT/databases`  
 6) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires 20GB of temporary storage space and ~11.2GB of final storage space. Run the following:  
     `python3 VIBRANT_setup.py` or `./VIBRANT_setup.py`  
 7) VIBRANT can automatically verify that downloads, setup and installation of dependancies was completed properly. You may choose to skip this, but it's very quick. This script can be called as many times as necessary to run verifications.  
