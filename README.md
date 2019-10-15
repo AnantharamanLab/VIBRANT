@@ -91,7 +91,7 @@ VIBRANT is built for efficiently running on metagenomes but can also run on indi
 
 1) Install dependancies. See *Requirements* section above.
 2) Download VIBRANT using git clone or download zip file.  *Note*: if you download the zip file you will have the parent folder `VIBRANT-master` instead of `VIBRANT`.  
-    `git clone https://github.com/KrisKieft/VIBRANT`  
+    `git clone https://github.com/AnantharamanLab/VIBRANT`  
 3) You may want to add permissions to all files.  
     `chmod -R 777 VIBRANT`  
 4) Move parent folder (`VIBRANT`) to desired location. VIBRANT will function no matter where the parent folder is located or moved to, but hierarchy of files and folders within the parent folder must remain constant.  
