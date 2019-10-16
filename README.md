@@ -53,7 +53,7 @@ Please ensure the following programs are installed and in your machine's PATH. N
 
 ##### Example Installations:  
 1. Python3: see Python webpage. You can check your current version using `python --version`. Required version >= 3.5.
-2. Prodigal: `conda install prodigal` or `brew install prodigal` or `apt-get install prodigal` or GitHub clone
+2. Prodigal: `conda install -c bioconda prodigal` or `brew install prodigal` or `apt-get install prodigal` or GitHub clone
 3. HMMER3: `conda install -c bioconda hmmer` or `brew install hmmer` or `apt install hmmer` or GitHub clone
 4. gzip: you likely already have this installed
 5. tar: you likely already have this installed
