@@ -61,14 +61,14 @@ Please ensure the following programs are installed and in your machine's PATH. N
 
 
 #### Python3 Dependancies: Installation  
-There are several Python3 dependancies that must be installed as well. You may already have some of these installed.
+There are several Python3 dependancies that must be installed as well. You may already have some of these installed. *Note*: For numpy an error may occur stating "ImportError: No module named 'numpy.random.\_pickle" if the numpy version is not up to date (version >= 1.17.0).  
 
 ##### Packages  
 1. BioPython: https://biopython.org/wiki/Download
 2. Pandas: https://pandas.pydata.org/pandas-docs/stable/install.html
 3. Matplotlib: https://matplotlib.org/
 4. Seaborn: https://seaborn.pydata.org/
-5. Numpy: https://numpy.org/
+5. Numpy (version >= 1.17.0): https://numpy.org/
 6. Scikit-learn: https://scikit-learn.org/stable/
 7. Pickle: https://docs.python.org/3/library/pickle.html
 
@@ -77,7 +77,7 @@ There are several Python3 dependancies that must be installed as well. You may a
 2. Pandas: `pip install pandas` or `conda install -c anaconda pandas` or `apt-get install python-pip`
 3. Matplotlib: `pip install matplotlib` or `conda install matplotlib` or `apt-get install python-matplotlib`
 4. Seaborn: `pip install seaborn` or `conda install seaborn`
-5. Numpy: `pip install numpy` or `conda install -c anaconda numpy` or `apt-get install python-numpy`
+5. Numpy (version >= 1.17.0): `pip install numpy` or `conda install -c anaconda numpy` or `apt-get install python-numpy`
 6. Scikit-learn: `pip install -U scikit-learn` or `conda install scikit-learn`
 7. Pickle: this should already come with Python3. If you have issues try `pip install pickle-mixin`
 
