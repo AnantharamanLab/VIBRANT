@@ -133,7 +133,7 @@ VIBRANT is built for efficiently running on metagenomes but can also run on indi
 10) Test out a set of non-viral scaffolds in nucleotide format.  
     `python3 ../VIBRANT_run.py -i no_phages.fna` from within the `example_data/` folder  
 
-11) Test out a scaffold in nucleotide format that does not meet the minimum requirement of 3kb in length. VIBRANT will exit because the input sequence is not 3kb.  
+11) Test out a scaffold in nucleotide format that does not meet the minimum requirement of 1kb in length. VIBRANT will exit because the input sequence is not 1kb. *Note:* Exiting only occurs if *all* the scaffolds do not meet the minimum requirements.  
     `python3 ../VIBRANT_run.py -i short_scaffold.fsa` from within the `example_data/` folder  
 
 ### Arguments and Flags  
