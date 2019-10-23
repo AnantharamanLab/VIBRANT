@@ -20,7 +20,8 @@ ______
 #### Summary:  
 * Issue: some extracted proviruses were given the wrong genome sequence. Issue is now fixed.  
 * Update: minimum sequence length is now 1000bp which greatly increases virus identifications from some metagenomes.  
-* Update: metrics for quality analysis of scaffolds has been changed.  
+* Update: metrics for quality analysis of scaffolds has been changed.
+* Note: there is no need to re-download or re-compile the databases.  
 
 #### Explanations:  
 * Fixed a bug that was causing issues with extracting the correct genomic region of an integrated lysogenic virus (provirus). Briefly, the issue was causing some extracted proviruses (those with "*\_fragment\_#*" in the name) to have either the wrong genomic sequence or a sequence length of zero. The respective proteins and virus identification metrics for these scaffolds remains identical.  
