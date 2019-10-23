@@ -16,7 +16,7 @@ VIBRANT v1.0.1
 
 
 ______
-## Updates for v1.0.0:  
+## Updates for v1.0.1:  
 #### Summary:  
 * Issue: some extracted proviruses were given the wrong genome sequence. Issue is now fixed.  
 * Update: minimum sequence length is now 1000bp which greatly increases virus identifications from some metagenomes.  
