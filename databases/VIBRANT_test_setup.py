@@ -102,5 +102,5 @@ if error > 0:
 
 if error == 0:
     print("\n")
-    print("VIBRANT v1.0.0 is good to go!")
+    print("VIBRANT v1.0.1 is good to go!")
     print("\n")
