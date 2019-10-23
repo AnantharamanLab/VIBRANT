@@ -298,23 +298,23 @@ if format == "nucl":
                     if "fragment" not in name:
                         seq = list(seq)
                         seq_start = "".join(seq[0:20])
-                        n = int(len(seq))-1000
+                        n = int(len(seq))-900
                         while n <= len(seq):
                             seq_end = "".join(seq[n:n+20])
                             if str(seq_start) == str(seq_end):
                                 circular_phages.write(str(name) + '\t' + 'lysogenic' + '\t' + 'complete circular' + '\n')
-                                n += 1000
+                                n += 900
                             else:
                                 n += 1
                 for item, sequence in SimpleFastaParser(lytic_phages):
                     sequence = list(sequence)
                     sequence_start = "".join(sequence[0:20])
-                    n = int(len(sequence))-1000
+                    n = int(len(sequence))-900
                     while n <= len(sequence):
                         sequence_end = "".join(sequence[n:n+20])
                         if str(sequence_start) == str(sequence_end):
                             circular_phages.write(str(item) + '\t' + 'lytic' + '\t' + 'complete circular' + '\n')
-                            n += 1000
+                            n += 900
                         else:
                             n += 1
 
