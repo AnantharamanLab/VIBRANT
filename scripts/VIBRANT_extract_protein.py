@@ -1,7 +1,7 @@
 #! /usr/bin/env python3
 # Author: Kristopher Kieft, UW-Madison, 2019
 
-# VIBRANT v1.0.0
+# VIBRANT v1.0.1
 # Virus Identification By iteRative ANnoTation
 
 # Usage: see VIBRANT_run.py
