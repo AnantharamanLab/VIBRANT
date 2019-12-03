@@ -106,16 +106,16 @@ There are several Python3 dependancies that must be installed as well. You may a
 VIBRANT is built for efficiently running on metagenomes but can also run on individual or small groups of genomes. Each scaffold is considered individually, so results will *not* vary whether the scaffold is run as part of a metagenome or by itself.  
 
 ### Quick Start
-There are two different routes to downloading VIBRANT: Anaconda install or GitHub clone/download.  
+There are two different routes to downloading VIBRANT: [Anaconda](https://anaconda.org/bioconda/vibrant) install or [GitHub](https://github.com/AnantharamanLab/VIBRANT) clone/download.  
 
-## Anaconda
+### Anaconda
 1) Install dependancies. See *Requirements* section above.
 2) Install directly to PATH using conda.  
     `conda install -c bioconda vibrant`
-3) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires 20GB of temporary storage space and ~11.2GB of final storage space. To do this, identify the location of VIBRANT scripts using `which VIBRANT_run.py`. Copy the path to bin (e.g., `/Users/kristopher/anaconda3/bin/`) and replace with `/your_path` in the example below (e.g., `/Users/kristopher/anaconda3/bin/download-db.sh`).  
+3) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires 20GB of temporary storage space and ~11.2GB of final storage space. To do this, identify the location of VIBRANT scripts using `which VIBRANT_run.py`. Copy the path to bin (e.g., `/Users/kristopher/anaconda3/bin/`) and replace with `/your_path/` in the example below (e.g., `/Users/kristopher/anaconda3/bin/download-db.sh`).  
     `/your_path/download-db.sh`
 
-## GitHub
+### GitHub
 *Note:* if at any time you are given a "permission denied" error you can run `chmod 777 <file_name>` or `chmod -R 777 <folder_name>`. Simply repace `<file_name>` or `<folder_name>` with the file/folder that you would like to add permissions to.
 
 1) Install dependancies. See *Requirements* section above.
@@ -132,8 +132,10 @@ There are two different routes to downloading VIBRANT: Anaconda install or GitHu
     `python3 VIBRANT_test_setup.py` or `./VIBRANT_test_setup.py`  
 
 
-## Testing VIBRANT
+### Testing VIBRANT
 *Note:* VIBRANT does not write to standard out (command prompt screen) while running or when it finishes (i.e., not verbose). However, VIBRANT will write to standard out in the event that it encounters an error, such as incorrect use of optional arguments or incorrect input file format. See step 11 below for an example.  
+
+*Anaconda users:* these example datasets are not made available through Anaconda install. Steps 8-11 may be skipped or the files may be downloaded from the [GitHub site](https://github.com/AnantharamanLab/VIBRANT).  
 
 *Optional:* run VIBRANT on test datasets (steps 8-11). *Note*: you may want to try using the `-t` flag to increase VIBRANT's speed. See *Arguments and Flags* section for details.  
 
