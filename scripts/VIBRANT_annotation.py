@@ -1838,7 +1838,7 @@ with open(infile + '_genome_quality.out', 'w') as quality:
 				viral_genomes.append(genome)
 				accnos.write(str(genome).replace("$~&", " ").replace('^@%','"') + "\n")
 				style = 'lytic'
-				if genome in prophage_integrase:
+				if genome in prophage_integrase or "fragment" in str(genome):
 					style = 'lysogenic'
 				if DNA_check >= 5 and special_check >= 10 and total_genes >= 30 and all_vog >= 10 and v_check >= 5:
 					quality.write(str(genome.replace("$~&", " ").replace('^@%','"')) + "\t" + str(style) + "\t" + "high quality draft\n")
