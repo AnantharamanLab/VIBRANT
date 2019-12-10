@@ -87,7 +87,7 @@ There are several Python3 dependancies that must be installed as well. You may a
 2. Pandas: https://pandas.pydata.org/pandas-docs/stable/install.html
 3. Matplotlib: https://matplotlib.org/
 4. Seaborn: https://seaborn.pydata.org/
-5. Numpy: https://numpy.org/
+5. Numpy: https://numpy.org/ (version >= 1.17.0)
 6. Scikit-learn: https://scikit-learn.org/stable/
 7. Pickle: https://docs.python.org/3/library/pickle.html
 
@@ -96,7 +96,7 @@ There are several Python3 dependancies that must be installed as well. You may a
 2. Pandas: `pip install pandas` or `conda install -c anaconda pandas` or `apt-get install python-pip`
 3. Matplotlib: `pip install matplotlib` or `conda install matplotlib` or `apt-get install python-matplotlib`
 4. Seaborn: `pip install seaborn` or `conda install seaborn`
-5. Numpy: `pip install numpy` or `conda install -c anaconda numpy` or `apt-get install python-numpy`
+5. Numpy: `pip install numpy` or `conda install -c anaconda numpy` or `apt-get install python-numpy` (if needed you can update using 'pip install --upgrade numpy==1.17.0')
 6. Scikit-learn: `pip install -U scikit-learn` or `conda install scikit-learn`
 7. Pickle: this should already come with Python3. If you have issues try `pip install pickle-mixin`
 
