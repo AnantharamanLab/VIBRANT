@@ -10,6 +10,9 @@ Anantharaman Lab
 University of Wisconsin-Madison  
 kieft@wisc.edu  
 
+## Announcement 12-23-19
+An issue has been noted for users of VIBRANT on the CyVerse Discovery Environment that may result in a slightly lower recovery of viruses. The issue should not be reflected in the stand alone version of VIBRANT. Due to the holiday season this issue may take some time to resolve. We apologize for any inconveniences.  
+
 
 ## Version
 VIBRANT v1.0.1  
