@@ -161,7 +161,9 @@ VIBRANT comes with a couple of very simple optional arguments. At any point you 
 *Common optional arguments*
 * `-t`: increase the number of VIBRANT parallel runs (similar to threads). The integer entered here will have no impact on results but may impact runtime. To parallelize VIBRANT, the `-t` flag will indicate how many separate files to split the input file into; these will all be run in tandem. For example, an input file with 10 scaffolds that has invoked `-t 5` will run VIBRANT 5 separate times simultaneously with each run consisting of 2 scaffolds each. Default = `1`.  
 
-* `-f`: identify either nucleotide or protein input. This flag is only required when inputting proteins (`-f prot`) but can be added with any nucleotide input (`-f nucl`). Default = `nucl`.
+* `-f`: identify either nucleotide or protein input. This flag is only required when inputting proteins (`-f prot`) but can be added with any nucleotide input (`-f nucl`). Default = `nucl`.  
+
+* `-folder`: specify the directory in which to deposit VIBRANT's output folder. If the specified directory doesn't exist then it will be created. Default = your current working directory.  
 
 *Uncommon optional arguments*
 * `-l`: increase the minimum scaffold length requirement. The minimum is 3000 basepairs (`-l 3000`). Default = `3000`. For example, if `-l 5000` is invoked VIBRANT will only consider scaffolds greater than or equal to 5000bp.  
