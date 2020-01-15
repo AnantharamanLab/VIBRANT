@@ -324,8 +324,9 @@ subprocess.Popen('rm ' + base + '*parallel-runs*phages_*.fna 2>/dev/null', shell
 f1.wait()
 cat_faa = 'cat ' + base + '.parallel-runs_*.faa > ' + base + '.faa 2>/dev/null'
 subprocess.Popen(cat_faa, shell=True)
-cat_ffn = 'cat ' + base + '.parallel-runs_*.ffn > ' + base + '.ffn 2>/dev/null'
-subprocess.Popen(cat_ffn, shell=True)
+if format == 'nucl':
+	cat_ffn = 'cat ' + base + '.parallel-runs_*.ffn > ' + base + '.ffn 2>/dev/null'
+	subprocess.Popen(cat_ffn, shell=True)
 
 cat_annotations = 'cat VIBRANT_annotations*' + base + '* > temp_VIBRANT_annotations_' + str(base) + '.txt 2>/dev/null'
 p6 = subprocess.Popen(cat_annotations, shell=True)
