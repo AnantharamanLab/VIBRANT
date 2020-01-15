@@ -848,7 +848,6 @@ elif os.path.exists(str(out_folder)):
 	subprocess.run('mkdir ' + str(out_folder) + 'VIBRANT_' + base, shell=True)
 	final_path = str(out_folder) + 'VIBRANT_'
 
-#subprocess.run('mkdir VIBRANT_' + base, shell=True)
 if format == "nucl":
 	subprocess.run('mv ' + base + '.faa ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
 	subprocess.run('mv ' + base + '.ffn ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
