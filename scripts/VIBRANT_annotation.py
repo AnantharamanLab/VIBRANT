@@ -1,5 +1,5 @@
 #! /usr/bin/env python3
-# Author: Kristopher Kieft, UW-Madison, 2019 
+# Author: Kristopher Kieft, UW-Madison, 2019
 
 # VIBRANT v1.0.1
 # Virus Identification By iteRative ANnoTation
@@ -62,7 +62,9 @@ format = args.f[0]
 
 ############################### Set input  #####################################
 infile = str((input.rsplit('.',1)[:-1])[0])
-base = infile.rsplit(".",1)[0]
+base = str(infile.rsplit("/",1)[-1])
+in_base = str(infile.rsplit(".",1)[0]).rsplit("/",1)[-1]
+path = str(infile.rsplit("/",1)[:-1][0])+"/"
 
 ############################### Limit lengths ##################################
 if format == "nucl":
@@ -115,7 +117,7 @@ if len(correct) == 0:
 
 for item in correct:
 	if item != "":
-		subprocess.run("echo '1' >> " + base + "_four-orf-count.txt", shell=True)
+		subprocess.run("echo '1' >> " + str(path)+str(in_base) + "_four-orf-count.txt", shell=True)
 
 ####### write out genomes with correct number of ORFs
 with open(str(in_proteins), 'r') as write_fasta:
@@ -346,7 +348,7 @@ subprocess.call(['rm', infile+'.KEGG.hmmtbl.temp.txt'])
 
 with open(infile+'.master.txt', 'r') as master:
 	master = master.read().replace('\n','\t').split('\t')
-	with open('temp_kegg_annotations.' + infile + '.txt', 'w') as output:
+	with open(str(path)+'temp_kegg_annotations.' + str(base) + '.txt', 'w') as output:
 		output.write('protein' + '\t' + 'genome' + '\t' + 'KO' + '\t' + 'KO evalue' + '\t' + 'KO score' + '\t' + 'KO category'  + '\n')
 
 ##########################  Creat Dictionaries  ################################
@@ -398,7 +400,7 @@ with open(infile+'.master.txt', 'r') as master:
 		##### next
 			i += 2
 
-with open('temp_kegg_annotations.' + infile + '.txt', 'r') as annotations:
+with open(str(path)+'temp_kegg_annotations.' + str(base) + '.txt', 'r') as annotations:
 ####### Create unique genomes List
 	annotations = annotations.read().replace('\n','\t').split('\t')
 	annotations.append('')
@@ -594,7 +596,7 @@ if len(prophage_dict) > 0:
 				if name.rsplit("_",1)[0] not in removed:
 					write_fasta.write(">" + str(name) + "\n" + str(seq) + "\n")
 
-	cat_file = str("cat " + str(infile+'.intact_analysis.faa') + " " + str(infile+'.prophage_analysis.faa') + " > " + str(infile+'.analysis.faa'))
+	cat_file = str("cat " + str(infile)+'.intact_analysis.faa' + " " + str(infile)+'.prophage_analysis.faa' + " > " + str(infile)+'.analysis.faa')
 	subprocess.run(cat_file, shell=True)
 	subprocess.call(['rm', infile+'.intact_analysis.faa', infile+'.prophage_analysis.faa'])
 
@@ -611,7 +613,7 @@ with open(infile+'.analysis.faa', 'r') as write_fasta:
 ##########################  Creat Dictionaries  ################################
 with open(infile+'.master.txt', 'r') as master:
 	master = master.read().replace('\n','\t').split('\t')
-	with open('temp_kegg_annotations.' + infile + '.txt', 'w') as output:
+	with open(str(path)+'temp_kegg_annotations.' + str(base) + '.txt', 'w') as output:
 		output.write('protein' + '\t' + 'genome' + '\t' + 'KO' + '\t' + 'KO evalue' + '\t' + 'KO score' + '\t' + 'KO category'  + '\n')
 
 #######  KEGG
@@ -666,7 +668,7 @@ with open(infile+'.master.txt', 'r') as master:
 				i += 2
 
 ###########################  Calculate Counts  #################################
-with open('temp_kegg_annotations.' + infile + '.txt', 'r') as annotations:
+with open(str(path)+'temp_kegg_annotations.' + str(base) + '.txt', 'r') as annotations:
 
 ####### Create unique genomes List
 	annotations = annotations.read().replace('\n','\t').split('\t')
@@ -762,7 +764,7 @@ with open('temp_kegg_annotations.' + infile + '.txt', 'r') as annotations:
 					remove_check += 1
 
 if len(keep) == 0:
-	subprocess.call(['rm', 'temp_kegg_annotations.' + infile + '.txt'])
+	subprocess.call(['rm', str(path)+'temp_kegg_annotations.' + str(base) + '.txt'])
 	exit()
 
 with open(infile+'.analysis.faa', 'r') as read_fasta:
@@ -772,7 +774,7 @@ with open(infile+'.analysis.faa', 'r') as read_fasta:
 				write_fasta.write(">" + str(name) + "\n" + str(seq) + "\n")
 
 subprocess.call(['rm', infile+'.analysis.faa'])
-subprocess.call(['rm', 'temp_kegg_annotations.' + infile + '.txt'])
+subprocess.call(['rm', str(path)+'temp_kegg_annotations.' + str(base) + '.txt'])
 
 ########################### Generate Master File  ##############################
 with open(infile+'.appended.faa', 'r') as write_fasta:
@@ -805,7 +807,7 @@ subprocess.call(['rm', infile+'.Pfam.hmmtbl.temp.txt'])
 
 with open(infile+'.master.txt', 'r') as master:
 	master = master.read().replace('\n','\t').split('\t')
-	with open('temp_pfam_annotations.' + infile + '.txt', 'w') as output:
+	with open(str(path)+'temp_pfam_annotations.' + str(base) + '.txt', 'w') as output:
 		output.write('protein' + '\t' + 'genome' + '\t' + 'Pfam' + '\t' + 'Pfam evalue' + '\t' + 'Pfam score' + '\t' + 'Pfam category'  + '\n')
 
 #######  pfam
@@ -842,7 +844,7 @@ with open(infile+'.master.txt', 'r') as master:
 			i += 2
 
 ###########################  Calculate Counts  #################################
-with open('temp_pfam_annotations.' + infile + '.txt', 'r') as annotations:
+with open(str(path)+'temp_pfam_annotations.' + str(base) + '.txt', 'r') as annotations:
 ####### Create unique genomes List
 	annotations = annotations.read().replace('\n','\t').split('\t')
 	annotations.append('')
@@ -921,7 +923,7 @@ with open('temp_pfam_annotations.' + infile + '.txt', 'r') as annotations:
 					remove_check += 1
 
 if len(keep) == 0:
-	subprocess.call(['rm', 'temp_pfam_annotations.' + infile + '.txt'])
+	subprocess.call(['rm', str(path)+'temp_pfam_annotations.' + str(base) + '.txt'])
 	exit()
 
 ########################### Generate New Database  #############################
@@ -931,7 +933,7 @@ with open(infile+'.appended.faa', 'r') as read_fasta:
 			if str(name).rsplit("_",1)[0] in keep:
 				write_fasta.write(">" + str(name) + "\n" + str(seq) + "\n")
 
-subprocess.call(['rm', 'temp_pfam_annotations.' + infile + '.txt'])
+subprocess.call(['rm', str(path)+'temp_pfam_annotations.' + str(base) + '.txt'])
 
 ########################### Generate Master File  ##############################
 with open(infile+'.pass.faa', 'r') as write_fasta:
@@ -965,7 +967,7 @@ subprocess.call(['rm', infile+'.VOG.hmmtbl.temp.txt'])
 ############################### Open Files  ####################################
 with open(infile+'.master.txt', 'r') as master:
 	master = master.read().replace('\n','\t').split('\t')
-	with open('temp1_VIBRANT_annotations.' + infile + '.txt', 'w') as output:
+	with open(str(path)+'temp1_VIBRANT_annotations.' + str(base) + '.txt', 'w') as output:
 
 ##########################  Creat Dictionaries  ################################
 #######  VOG
@@ -1043,9 +1045,9 @@ with open(infile+'.master.txt', 'r') as master:
 			i += 2
 
 ###########################  Calculate Counts  #################################
-with open('temp1_VIBRANT_annotations.' + infile + '.txt', 'r') as annotations:
-	with open('temp_VIBRANT_results.' + infile + '.txt', 'w') as results:
-		with open('unmodified_VIBRANT_results.' + infile + '.txt', 'w') as unmod_results:
+with open(str(path)+'temp1_VIBRANT_annotations.' + str(base) + '.txt', 'r') as annotations:
+	with open(str(path)+'temp_VIBRANT_results.' + str(base) + '.txt', 'w') as results:
+		with open(str(path)+'unmodified_VIBRANT_results.' + str(base) + '.txt', 'w') as unmod_results:
 			results.write('genome' + '\t' + 'total genes'  + '\t' + 'all KEGG'  + '\t' + 'category KEGG'  + '\t' + 'all Pfam'  + '\t' + 'category vPfam'  + '\t' + 'all VOG'  + '\t' + 'category VOG'  + '\t' + 'KEGG int-rep'  + '\t' + 'KEGG zero'  + '\t' + 'Pfam int-rep'  + '\t' + 'Pfam zero'  + '\t' + 'VOG redoxin'  + '\t' + 'VOG rec-tran'  + '\t' + 'VOG int'  + '\t' + 'VOG RnR'  + '\t' + 'VOG DNA'  + '\t' + 'KEGG restriction check' + '\t' + 'KEGG toxin check' + '\t' + 'VOG special' + '\t' + 'annotation check'  + '\t' + 'p_v check'  + '\t' + 'p_k check'  + '\t' + 'k_v check'  + '\t' + 'k check'  + '\t' + 'p check'  + '\t' + 'v check'  + '\t' + 'h check' + '\n')
 			counter_check = 0
 			temp_dict = {}
@@ -1587,9 +1589,9 @@ if len(ORFs) == 0:
 plasmid_pred = []
 organism_pred = []
 if machine_check > 0:
-	with open('temp_VIBRANT_results.' + infile + '.txt', 'r') as machine_results:
+	with open(str(path)+'temp_VIBRANT_results.' + str(base) + '.txt', 'r') as machine_results:
 		with open(model, 'rb') as read_model:
-			with open('temp_VIBRANT_machine.' + infile + '.txt', 'w') as write_file:
+			with open(str(path)+'temp_VIBRANT_machine.' + str(base) + '.txt', 'w') as write_file:
 				annotation_result = pd.read_csv(machine_results, sep='\t', header=0)
 				if len(list(annotations)) > 0:
 					anno = preprocessing.normalize(annotation_result[['total genes' , 'all KEGG' , 'category KEGG' , 'all Pfam' , 'category vPfam' , 'all VOG' , 'category VOG' , 'KEGG int-rep' , 'KEGG zero' , 'Pfam int-rep' , 'Pfam zero' , 'VOG redoxin' , 'VOG rec-tran' , 'VOG int' , 'VOG RnR' , 'VOG DNA' , 'KEGG restriction check', 'KEGG toxin check', 'VOG special', 'annotation check' , 'p_v check' , 'p_k check' , 'k_v check' , 'k check' , 'p check' , 'v check' , 'h check']].values)
@@ -1609,7 +1611,7 @@ if machine_check > 0:
 				else:
 					write_file.write('')
 
-	with open('temp_VIBRANT_machine.' + infile + '.txt', 'r') as machine_file:
+	with open(str(path)+'temp_VIBRANT_machine.' + str(base) + '.txt', 'r') as machine_file:
 		machine = machine_file.read().replace('\n','\t').split('\t')
 		n = 1
 		while n < len(machine):
@@ -1628,17 +1630,17 @@ for item in temp_list:
 		final_check.append(item)
 
 
-with open('temp1_VIBRANT_annotations.' + infile + '.txt', 'r') as temp:
-	with open('temp2_VIBRANT_annotations.' + infile + '.txt', 'w') as final_anno:
+with open(str(path)+'temp1_VIBRANT_annotations.' + str(base) + '.txt', 'r') as temp:
+	with open(str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt', 'w') as final_anno:
 		for item in temp_list:
 			if str(item) in final_check:
 				final_anno.write(str(item) + "\t" + str(temp_dict[item]) + "\n")
 
-with open('temp2_VIBRANT_annotations.' + infile + '.txt', 'r') as final_anno:
+with open(str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt', 'r') as final_anno:
 	annotations = final_anno.read().replace('\n','\t').split('\t')
 	annotations = annotations[:-1]
 
-subprocess.run('rm temp1_VIBRANT_annotations.' + infile + '.txt', shell=True)
+subprocess.run('rm '+str(path)+'temp1_VIBRANT_annotations.' + str(base) + '.txt', shell=True)
 
 n = 1
 i = 0
@@ -1853,8 +1855,8 @@ with open(infile + '_genome_quality.out', 'w') as quality:
 
 
 if len(viral_genomes) == 0:
-	subprocess.call(['rm', 'temp2_VIBRANT_annotations.' + infile + '.txt'])
-	subprocess.call(['rm', 'temp_VIBRANT_results.' + infile + '.txt'])
+	subprocess.call(['rm', str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt'])
+	subprocess.call(['rm', str(path)+'temp_VIBRANT_results.' + str(base) + '.txt'])
 	subprocess.call(['rm', infile+'.pass.faa'])
 	subprocess.call(['rm', infile+'.master.txt'])
 	exit()
@@ -1868,11 +1870,11 @@ with open(AMG_list, 'r') as AMG_file:
 	AMG_list = AMG_file.read().split('\n')
 
 
-with open('temp2_VIBRANT_annotations.' + infile + '.txt', 'r') as temp:
-	with open('VIBRANT_annotations.' + infile + '.txt', 'w') as output:
+with open(str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt', 'r') as temp:
+	with open(str(path)+'VIBRANT_annotations.' + str(base) + '.txt', 'w') as output:
 		with open(annotation_names, 'r') as annotation_names:
-			with open('VIBRANT_AMGs.' + infile + '.txt', 'w') as AMG_out:
-				with open('VIBRANT_genbank_table.' + infile + '.txt', 'w') as gb_out:
+			with open(str(path)+'VIBRANT_AMGs.' + str(base) + '.txt', 'w') as AMG_out:
+				with open(str(path)+'VIBRANT_genbank_table.' + str(base) + '.txt', 'w') as gb_out:
 					anno_dict = {}
 					annotation_names = annotation_names.read().replace('\n','\t').split('\t')
 					annotation_dict = {}
@@ -1925,8 +1927,8 @@ with open('temp2_VIBRANT_annotations.' + infile + '.txt', 'r') as temp:
 						if item in AMG_dict:
 							AMG_out.write(str(item).replace("$~&", " ").replace('^@%','"') + "\t" + str(AMG_dict[item]) + "\n")
 
-with open('unmodified_VIBRANT_results.' + infile + '.txt', 'r') as results:
-	with open('VIBRANT_results.' + infile + '.txt', 'w') as Vresults:
+with open(str(path)+'unmodified_VIBRANT_results.' + str(base) + '.txt', 'r') as results:
+	with open(str(path)+'VIBRANT_results.' + str(base) + '.txt', 'w') as Vresults:
 		results = results.read().replace('\n','\t').split('\t')
 		if results[-1] == '':
 			results = results[:-1]
@@ -2071,8 +2073,8 @@ if format == "nucl":
 
 ################################### End of analysis ############################
 ####### remove files
-subprocess.call(['rm', 'temp2_VIBRANT_annotations.' + infile + '.txt'])
-subprocess.call(['rm', 'temp_VIBRANT_results.' + infile + '.txt'])
+subprocess.call(['rm', str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt'])
+subprocess.call(['rm', str(path)+'temp_VIBRANT_results.' + str(base) + '.txt'])
 subprocess.call(['rm', infile+'.pass.faa'])
 subprocess.call(['rm', infile+'.appended.faa'])
 subprocess.call(['rm', infile+'.master.txt'])
