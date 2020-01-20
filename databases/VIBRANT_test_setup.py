@@ -28,6 +28,7 @@ try:
     from sklearn.metrics import classification_report,confusion_matrix
     import pickle
     import os
+    import sklearn
 except Exception as e:
     print("\n")
     print("VIBRANT Error: Please install VIBRANT dependancy module(s). See below for the encountered error:")
@@ -36,7 +37,25 @@ except Exception as e:
     print("\n")
     exit()
 
+error = 0
+if str(sklearn.__version__) != '0.21.3':
+    if int(str(sklearn.__version__).split(".")[1]) < 21 or int(str(sklearn.__version__).split(".")[2]) < 3:
+        print()
+        print('VIBRANT Caution: running a version of Scikit-Learn lower than v0.21.3 will likely cause issues. With pip you can update by running "pip install --upgrade scikit-learn==0.21.3".')
+        print()
+        error += 1
+    if int(str(sklearn.__version__).split(".")[1]) > 21 or int(str(sklearn.__version__).split(".")[2]) > 3:
+        print()
+        print('VIBRANT Caution: running a version of Scikit-Learn higher than v0.21.3 may cause issues. With pip you can update by running "pip install --upgrade scikit-learn==0.21.3".')
+        print()
+        error += 1
 
+if str(np.version.version) != '1.17.0':
+    if int(str(np.version.version).split(".")[0]) < 1 or int(str(np.version.version).split(".")[1]) < 17:
+        print()
+        print('VIBRANT Caution: running a version of Numpy lower than v1.17.0 will likely cause issues. With pip you can update by running "pip install --upgrade numpy==1.17.0".')
+        print()
+        error += 1
 
 parent_path = str(os.path.dirname(os.path.abspath(__file__)).rsplit("/",1)[0])
 
@@ -80,7 +99,6 @@ except Exception as e:
     exit()
 
 
-error = 0
 if str(kegg) != "10033":
     print("VIBRANT Error: it looks like the KEGG HMM profiles were not downloaded/pressed correctly. Try re-running the VIBRANT_setup.py script.")
     error += 1
@@ -102,5 +120,5 @@ if error > 0:
 
 if error == 0:
     print("\n")
-    print("VIBRANT v1.0.1 is good to go!")
+    print("VIBRANT v1.0.0 is good to go!")
     print("\n")
