@@ -39,16 +39,17 @@ except Exception as e:
 
 error = 0
 if str(sklearn.__version__) != '0.21.3':
-    if int(str(sklearn.__version__).split(".")[1]) < 21 or int(str(sklearn.__version__).split(".")[2]) < 3:
-        print()
-        print('VIBRANT Caution: running a version of Scikit-Learn lower than v0.21.3 will likely cause issues. With pip you can update by running "pip install --upgrade scikit-learn==0.21.3".')
-        print()
-        error += 1
     if int(str(sklearn.__version__).split(".")[1]) > 21 or int(str(sklearn.__version__).split(".")[2]) > 3:
         print()
         print('VIBRANT Caution: running a version of Scikit-Learn higher than v0.21.3 may cause issues. With pip you can update by running "pip install --upgrade scikit-learn==0.21.3".')
         print()
         error += 1
+    elif int(str(sklearn.__version__).split(".")[1]) < 21 or int(str(sklearn.__version__).split(".")[2]) < 3:
+        print()
+        print('VIBRANT Caution: running a version of Scikit-Learn lower than v0.21.3 will likely cause issues. With pip you can update by running "pip install --upgrade scikit-learn==0.21.3".')
+        print()
+        error += 1
+
 
 if str(np.version.version) != '1.17.0':
     if int(str(np.version.version).split(".")[0]) < 1 or int(str(np.version.version).split(".")[1]) < 17:
