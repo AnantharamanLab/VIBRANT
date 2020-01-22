@@ -108,7 +108,7 @@ VIBRANT is built for efficiently running on metagenomes but can also run on indi
 ### Quick Start
 There are two different routes to downloading VIBRANT: [Anaconda](https://anaconda.org/bioconda/vibrant) install or [GitHub](https://github.com/AnantharamanLab/VIBRANT) clone/download.  
 
-### Anaconda
+### Anaconda (Note: issues have been experienced with the bioconda install. We suggest using GitHub.)  
 1) Install dependancies. See *Requirements* section above.
 2) Install directly to PATH using conda.  
     `conda install -c bioconda vibrant`
