@@ -108,12 +108,12 @@ VIBRANT is built for efficiently running on metagenomes but can also run on indi
 ### Quick Start
 There are two different routes to downloading VIBRANT: [Anaconda](https://anaconda.org/bioconda/vibrant) install or [GitHub](https://github.com/AnantharamanLab/VIBRANT) clone/download.  
 
-### Anaconda (Note: issues have been experienced with the bioconda install. We suggest using GitHub.)  
+### Anaconda (updated January 22, 2020)  
 1) Install dependancies. See *Requirements* section above.
 2) Install directly to PATH using conda.  
     `conda install -c bioconda vibrant`
-3) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires 20GB of temporary storage space and ~11.2GB of final storage space. To do this, identify the location of VIBRANT scripts using `which VIBRANT_run.py`. Copy the path to bin (e.g., `/Users/kristopher/anaconda3/bin/`) and replace with `/your_path/` in the example below (e.g., `/Users/kristopher/anaconda3/bin/download-db.sh`).  
-    `/your_path/download-db.sh`
+3) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires 20GB of temporary storage space and ~11.2GB of final storage space. To do this, run `download-db.sh` which should be in your system's PATH.  
+    `download-db.sh`
 
 ### GitHub
 *Note:* if at any time you are given a "permission denied" error you can run `chmod 777 <file_name>` or `chmod -R 777 <folder_name>`. Simply repace `<file_name>` or `<folder_name>` with the file/folder that you would like to add permissions to.
