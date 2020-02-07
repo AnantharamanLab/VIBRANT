@@ -174,6 +174,7 @@ if args.test == True:
     print()
     print("Verying correct dependency versions ...")
     print("Logger started. Check log file for messages and errors.")
+    print()
     logging.basicConfig(filename=str(parent_path) + '/databases/VIBRANT_test_setup.log', level=logging.INFO, format='%(message)s')
     logging.info = logging.info
 
@@ -206,6 +207,7 @@ except Exception as e:
     logging.info('')
     logging.info(e)
     logging.info('')
+    print("VIBRANT Error: see log for details.")
     exit()
 
 error = 0
@@ -259,6 +261,7 @@ try:
 except Exception as e:
     logging.info("VIBRANT Error: Prodigal is not installed or not in $PATH. Please install Prodigal or add to $PATH.")
     logging.info("\n")
+    print("VIBRANT Error: see log for details.")
     exit()
 
 try:
@@ -266,6 +269,7 @@ try:
 except Exception as e:
     logging.info("VIBRANT Error: HMMER3 is not installed or not in $PATH. Please install HMMER3 or add to $PATH.")
     logging.info("\n")
+    print("VIBRANT Error: see log for details.")
     exit()
 
 if str(kegg) != "10033":
@@ -285,6 +289,7 @@ if str(vog) != "19182":
     error += 1
 
 if error > 0:
+    print("VIBRANT Error: see log for details.")
     exit()
 
 if error == 0:
