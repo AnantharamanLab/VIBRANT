@@ -1,8 +1,9 @@
 #! /usr/bin/env python3
-# Author: Kristopher Kieft, UW-Madison, 2019
+# Author: Kristopher Kieft, UW-Madison
 
-# VIBRANT v1.0.1
+# VIBRANT v1.1.0
 # Virus Identification By iteRative ANnoTation
+# Release date: Feb 7 2020
 
 # Usage: see VIBRANT_run.py
 
@@ -22,7 +23,7 @@ import pickle
 
 ############################### Set Arguments  #################################
 vibrant = argparse.ArgumentParser(description='See main wrapper script: VIBRANT_run.py. This script performs the bulk of the work but is not callable on its own.')
-vibrant.add_argument('--version', action='version', version='VIBRANT v1.0.1')
+vibrant.add_argument('--version', action='version', version='VIBRANT v1.1.0')
 
 ####### Required
 vibrant.add_argument('-i', type=str, nargs=1, required=True, help='input fasta file')
@@ -32,33 +33,32 @@ vibrant.add_argument('-f', type=str, nargs=1, default='nucl', choices=['prot','n
 vibrant.add_argument('-l', type=str, nargs=1, default='1000', help='length in basepairs to limit input sequences [default=1000, can increase but not decrease]')
 vibrant.add_argument('-o', type=str, nargs=1, default='4', help='number of ORFs per scaffold to limit input sequences [default=4, can increase but not decrease]')
 vibrant.add_argument('-virome', action='store_true', help='use this setting if dataset is known to be comprised mainly of viruses. More sensitive to viruses, less sensitive to false identifications [default=off]')
-vibrant.add_argument('-k', type=str, nargs=1, help='path to KEGG HMMs (if moved from default location)')
-vibrant.add_argument('-p', type=str, nargs=1, help='path to Pfam HMMs (if moved from default location)')
-vibrant.add_argument('-v', type=str, nargs=1, help='path to VOG HMMs (if moved from default location)')
-vibrant.add_argument('-e', type=str, nargs=1, help='path to plasmid HMMs (if moved from default location)')
-vibrant.add_argument('-a', type=str, nargs=1, help='path to viral-subset Pfam HMMs (if moved from default location)')
-vibrant.add_argument('-c', type=str, nargs=1, help='path to VIBRANT categories file (if moved from default location)')
-vibrant.add_argument('-n', type=str, nargs=1, help='path to VIBRANT annotation to name file (if moved from default location)')
-vibrant.add_argument('-m', type=str, nargs=1, help='path to VIBRANT neural network machine learning model (if moved from default location)')
-vibrant.add_argument('-g', type=str, nargs=1, help='path to VIBRANT AMGs file (if moved from default location)')
+vibrant.add_argument('-d', type=str, nargs=1, help='path to "databases" directory that contains .HMM files (if moved from default location)')
+vibrant.add_argument('-m', type=str, nargs=1, help='path to "files" directory that contains .tsv and model files (if moved from default location)')
 
 ####### Create variables
 args = vibrant.parse_args()
 input = str(args.i[0])
-kegg_hmm = args.k[0]
-pfam_hmm = args.p[0]
-vog_hmm = args.v[0]
-plasmid_hmm = args.e[0]
-vpfam_hmm = args.a[0]
+kegg_hmm = str(args.d[0]) + 'KEGG_profiles_prokaryotes.HMM'
+pfam_hmm = str(args.d[0]) + 'Pfam-A_v32.HMM'
+vog_hmm = str(args.d[0]) + 'VOGDB94_phage.HMM'
+plasmid_hmm = str(args.d[0]) + 'Pfam-A_plasmid_v32.HMM'
+vpfam_hmm = str(args.d[0]) + 'Pfam-A_phage_v32.HMM'
 virome = args.virome
 lim_low = int(args.l[0])
 orf_low = int(args.o[0])
-categories = args.c[0]
-AMG_list = args.g[0]
-annotation_names = args.n[0]
-model = args.m[0]
+categories = str(args.m[0]) + 'VIBRANT_categories.tsv'
+AMG_list = str(args.m[0]) + 'VIBRANT_AMGs.tsv'
+annotation_names = str(args.m[0]) + 'VIBRANT_names.tsv'
+model = str(args.m[0]) + 'VIBRANT_machine_model.sav'
 format = args.f[0]
 
+cpu = "1"
+grep_shell = subprocess.check_output("hmmsearch -h", shell=True)
+grep_out = str(grep_shell.strip()).split("\\n")
+for item in grep_out:
+	if "--cpu" in item and "[" in item:
+		cpu = "0"
 
 ############################### Set input  #####################################
 infile = str((input.rsplit('.',1)[:-1])[0])
@@ -141,7 +141,7 @@ with open(infile+'.strand_switch.faa', 'r') as switch:
 	n = 0
 	genes = 0
 	strands = 0
-	strand_database = []
+	strand_database = {}
 	while n < len(complete_list)-3:
 		if complete_list[n] == complete_list[n+3]:
 			genes += 1
@@ -150,9 +150,7 @@ with open(infile+'.strand_switch.faa', 'r') as switch:
 			n += 3
 		if complete_list[n] != complete_list[n+3]:
 			genes += 1
-			strand_database.append(complete_list[n])
-			strand_database.append(genes)
-			strand_database.append(strands)
+			strand_database.update({complete_list[n]:[genes,strands]})
 			genes = 0
 			strands = 0
 			n += 3
@@ -161,26 +159,25 @@ with open(infile+'.strand_switch.faa', 'r') as switch:
 	with open(infile+'.first_pass_low.faa', 'w') as low:
 		with open(infile+'.first_pass_mid.faa', 'w') as mid:
 			with open(infile+'.first_pass_high.faa', 'w') as high:
-				n = 0
 				low_switch = []
 				mid_switch = []
 				high_switch = []
-				while n < len(strand_database):
-					for name, seq in SimpleFastaParser(switch):
-						if strand_database[n+2]/strand_database[n+1] < 0.05:
-							low.write(">" + str(name.rsplit("_",1)[0]) + "\n" + str(seq) + "\n")
-							low_switch.append(strand_database[n])
-						elif strand_database[n+2]/strand_database[n+1] < 0.35:
-							mid.write(">" + str(name.rsplit("_",1)[0]) + "\n" + str(seq) + "\n")
-							mid_switch.append(strand_database[n])
-						elif strand_database[n+2]/strand_database[n+1] >= 0.35:
-							high.write(">" + str(name) + "\n" + str(seq) + "\n")
-							high_switch.append(strand_database[n])
-					n += 3
+				for name, seq in SimpleFastaParser(switch):
+					denominator = int(strand_database[name.rsplit("_",2)[0]][0])
+					numerator = int(strand_database[name.rsplit("_",2)[0]][1])
+					if numerator/denominator < 0.05:
+						low.write(">" + str(name.rsplit("_",1)[0]) + "\n" + str(seq) + "\n")
+						low_switch.append(name)
+					elif numerator/denominator < 0.35:
+						mid.write(">" + str(name.rsplit("_",1)[0]) + "\n" + str(seq) + "\n")
+						mid_switch.append(name)
+					elif numerator/denominator >= 0.35:
+						high.write(">" + str(name) + "\n" + str(seq) + "\n")
+						high_switch.append(name)
 
 if len(high_switch) > 0:
 	with open(infile+'.first_pass_high.faa', 'r') as high:
-		subprocess.call(['hmmsearch', '--tblout', infile+'.vpfam.hmmtbl', '--noali', '-T', '50', '--cpu', '1', '-o', infile+'_temp.txt', vpfam_hmm, infile+'.first_pass_high.faa'])
+		subprocess.call(['hmmsearch', '--tblout', infile+'.vpfam.hmmtbl', '--noali', '-T', '50', '--cpu', cpu, '-o', infile+'_temp.txt', vpfam_hmm, infile+'.first_pass_high.faa'])
 		with open(infile+'.vpfam.hmmtbl', 'r') as vpfam_infile:
 			with open(infile+'.vpfam.hmmtbl.temp.txt', 'w') as vpfam_outfile:
 				vpfam_outfile.write("protein" + "\t" + "id" + "\t" + "evalue" + "\t" + "score" + '\n')
@@ -244,7 +241,7 @@ else:
 
 if no_contigs == False:
 ############################### Run/Parse plasmid hmmsearch  #######################
-	subprocess.call(['hmmsearch', '--tblout', infile+'.plasmid.hmmtbl', '--noali', '-T', '50', '--cpu', '1', '-o', infile+'_temp.txt', plasmid_hmm, infile+'.first_pass.faa'])
+	subprocess.call(['hmmsearch', '--tblout', infile+'.plasmid.hmmtbl', '--noali', '-T', '50', '--cpu', cpu, '-o', infile+'_temp.txt', plasmid_hmm, infile+'.first_pass.faa'])
 	with open(infile+'.plasmid.hmmtbl', 'r') as plasmid_infile:
 		with open(infile+'.plasmid.hmmtbl.temp.txt', 'w') as plasmid_outfile:
 			plasmid_outfile.write("protein" + "\t" + "id" + "\t" + "evalue" + "\t" + "score" + '\n')
@@ -324,7 +321,7 @@ if counter == 0:
 	exit()
 
 ###########################  Run/Parse KEGG hmmsearch ##########################
-subprocess.call(['hmmsearch', '--tblout', infile+'.KEGG.hmmtbl', '--noali', '-T', '40', '--cpu', '1', '-o', infile+'_temp.txt', kegg_hmm, infile+'.appended.faa'])
+subprocess.call(['hmmsearch', '--tblout', infile+'.KEGG.hmmtbl', '--noali', '-T', '40', '--cpu', cpu, '-o', infile+'_temp.txt', kegg_hmm, infile+'.appended.faa'])
 with open(infile+'.KEGG.hmmtbl', 'r') as kegg_infile:
 	with open(infile+'.KEGG.hmmtbl.temp.txt', 'w') as kegg_outfile:
 		kegg_outfile.write("protein" + "\t" + "id" + "\t" + "evalue" + "\t" + "score" + '\n')
@@ -784,7 +781,7 @@ with open(infile+'.appended.faa', 'r') as write_fasta:
 			master.write(name + '\t' + str(name.rsplit("_",1)[0]) + '\n')
 
 ###########################  Run/Parse Pfam hmmsearch ##########################
-subprocess.call(['hmmsearch', '--tblout', infile+'.Pfam.hmmtbl', '--noali', '-T', '40', '--cpu', '1', '-o', infile+'_temp.txt', pfam_hmm, infile+'.appended.faa'])
+subprocess.call(['hmmsearch', '--tblout', infile+'.Pfam.hmmtbl', '--noali', '-T', '40', '--cpu', cpu, '-o', infile+'_temp.txt', pfam_hmm, infile+'.appended.faa'])
 with open(infile+'.Pfam.hmmtbl', 'r') as pfam_infile:
 	with open(infile+'.Pfam.hmmtbl.temp.txt', 'w') as pfam_outfile:
 		pfam_outfile.write("protein" + "\t" + "id" + "\t" + "evalue" + "\t" + "score" + '\n')
@@ -944,7 +941,7 @@ with open(infile+'.pass.faa', 'r') as write_fasta:
 
 ###########################  Run/Parse VOG hmmsearch ##########################
 
-subprocess.call(['hmmsearch', '--tblout', infile+'.VOG.hmmtbl', '--noali', '-T', '40', '--cpu', '1', '-o', infile+'_temp.txt', vog_hmm, infile+'.pass.faa'])
+subprocess.call(['hmmsearch', '--tblout', infile+'.VOG.hmmtbl', '--noali', '-T', '40', '--cpu', cpu, '-o', infile+'_temp.txt', vog_hmm, infile+'.pass.faa'])
 with open(infile+'.VOG.hmmtbl', 'r') as kegg_infile:
 	with open(infile+'.VOG.hmmtbl.temp.txt', 'w') as kegg_outfile:
 		kegg_outfile.write("protein" + "\t" + "id" + "\t" + "evalue" + "\t" + "score" + '\n')
@@ -1855,10 +1852,11 @@ with open(infile + '_genome_quality.out', 'w') as quality:
 
 
 if len(viral_genomes) == 0:
-	subprocess.call(['rm', str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt'])
-	subprocess.call(['rm', str(path)+'temp_VIBRANT_results.' + str(base) + '.txt'])
-	subprocess.call(['rm', infile+'.pass.faa'])
-	subprocess.call(['rm', infile+'.master.txt'])
+	subprocess.call('rm '+str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt'+' 2>/dev/null', shell=True)
+	subprocess.call('rm '+str(path)+'temp_VIBRANT_results.' + str(base) + '.txt'+' 2>/dev/null', shell=True)
+	subprocess.call('rm '+str(path)+str(base)+'.pass.faa'+' 2>/dev/null', shell=True)
+	subprocess.call('rm '+str(path)+str(base)+'.appended*faa'+' 2>/dev/null', shell=True)
+	subprocess.call('rm '+str(path)+str(base)+'.master.txt'+' 2>/dev/null', shell=True)
 	exit()
 
 for protein in final_check:
@@ -2073,11 +2071,11 @@ if format == "nucl":
 
 ################################### End of analysis ############################
 ####### remove files
-subprocess.call(['rm', str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt'])
-subprocess.call(['rm', str(path)+'temp_VIBRANT_results.' + str(base) + '.txt'])
-subprocess.call(['rm', infile+'.pass.faa'])
-subprocess.call(['rm', infile+'.appended.faa'])
-subprocess.call(['rm', infile+'.master.txt'])
+subprocess.call('rm '+str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt'+' 2>/dev/null', shell=True)
+subprocess.call('rm '+str(path)+'temp_VIBRANT_results.' + str(base) + '.txt'+' 2>/dev/null', shell=True)
+subprocess.call('rm '+str(path)+str(base)+'.pass.faa'+' 2>/dev/null', shell=True)
+subprocess.call('rm '+str(path)+str(base)+'.appended*faa'+' 2>/dev/null', shell=True)
+subprocess.call('rm '+str(path)+str(base)+'.master.txt'+' 2>/dev/null', shell=True)
 
 
                                                                ##')
