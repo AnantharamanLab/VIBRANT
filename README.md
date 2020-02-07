@@ -4,7 +4,7 @@
 ### Virus Identification By iteRative ANnoTation
 
 
-10/22/2019  
+02/07/2020   
 Kristopher Kieft  
 Anantharaman Lab  
 University of Wisconsin-Madison  
@@ -12,20 +12,38 @@ kieft@wisc.edu
 
 
 ## Version
-VIBRANT v1.0.1  
+VIBRANT v1.1.0  
 
 ## Citation
 If you find VIBRANT useful please consider citing our preprint on [bioRxiv](https://www.biorxiv.org/content/10.1101/855387v1):  
 Kieft, K., Zhou, Z., and Anantharaman, K. (2019). VIBRANT: Automated recovery, annotation and curation of microbial viruses, and evaluation of virome function from genomic sequences. BioRxiv 855387.  
 ______
-## Updates for v1.0.1:  
+## Updates for v1.1.0 (Feb 7 2020):  
 #### Summary:  
+* Issue: incorrect storage of strand switching information caused inconsistent results and potential decrease in virus recovery. Issue is now resolved.  
+* Update: modification of `hmmsearch` command to increase speed if using a newer version (version >= 3.2.1).  
+* Update: addition of `-folder` flag and compression of databases (`-d`) and files flags (`-m`).  
+* Update: modification of `VIBRANT_setup.py` messages and removal of `VIBRANT_test_setup.py`.  
+* Issue: annotations with PF12761.7 caused issues.  
+* Note: there is no need to re-download or re-compile the databases.  
+* Note: results of virus identification may vary compared to v1.0.1.  
+* Note: please verify Scikit-Learn and numpy versions. Incorrect versions may cause inconsistent and invalid results.  
+
+#### Explanations:  
+* Fixed a bug that was causing strand switching information to be stored with the wrong scaffolds. This caused scaffolds to undergo potentially incorrect pre-filtering (see flowchart and methods). Due to this issue, viral scaffolds may have been filtered out accidentally. This also led to inconsistent results between identical runs of VIBRANT because the same scaffold was given various strand switching information depending on the run. Both issues of incorrect strand switching and inconsistent results have been resolved.  
+* The usage of `hmmsearch --cpu` changed with newer versions of HMMER (version >= 3.2.1). For older versions the command used by VIBRANT is `--cpu 1` whereas newer versions `--cpu 0` is used. VIBRANT will automatically detect your version and use the appropriate command. This increases speed by optimizing cpu usage.  
+* The new `-folder` flag allows for the designation of an output directory to deposit the final VIBRANT output as well as all temporary files. When invoked this flag will create the new directory if it does not exist or add to the directory if it already exists. This may especially be useful when running VIBRANT on a shared computing cluster. The new `-d` and `-m` flags are useful if you have moved the location of the `databases/` and/or `files/` directories from their default location. Previously this required several flags that have now been condensed to two.  
+* The new `VIBRANT_setup.py` script generates additional messages for version control and it now does not require `VIBRANT_test_setup.py`. There is no need to re-run this script if you have ran it with a previous version. If you want to test dependencies/versions use `VIBRANT_setup.py -test`. It is suggested to run `VIBRANT_setup.py -test` to quickly verify correct setup.  
+* PF12761.7 was not given a name in `VIBRANT_names.tsv` and would cause errors if a protein was annotated with PF12761.7. This issue has been resolved.  
+______
+#### Updates for v1.0.1 (outdated):  
+##### Summary:  
 * Issue: some extracted proviruses were given the wrong genome sequence. Issue is now fixed.  
 * Update: minimum sequence length is now 1000bp which greatly increases virus identifications from some metagenomes.  
 * Update: metrics for quality analysis of scaffolds has been changed.  
 * Note: there is no need to re-download or re-compile the databases.  
 
-#### Explanations:  
+##### Explanations:  
 * Fixed a bug that was causing issues with extracting the correct genomic region of an integrated lysogenic virus (provirus). Briefly, the issue was causing some extracted proviruses (those with "*\_fragment\_#*" in the name) to have either the wrong genomic sequence or a sequence length of zero. The respective proteins and virus identification metrics for these scaffolds remains identical.  
 * The minimum scaffold length is now set to 1000bp (previous 3000bp). This greatly increases total virus identification within metagenomes that contain many sequences less than 3kb. This has no effect on false discovery since the minimum open reading frame requirement is still 4. For example, a 1kb and 3kb scaffold each encoding 4 open reading frames will be considered identically since neither sequence length nor sequence features impact virus identification.  
 * The quality analysis of scaffolds was updated. The category *fragment quality draft* was removed. The categories are now *complete circular*, *high*, *medium* and *low quality draft*. The update was made to better represent the completeness of *Caudovirales* scaffolds which are likely to be the most abundant viral population in a metagenome. Baseline tests indicate the new metrics linearly represent the completeness of *Caudovirales* genomes.  
@@ -34,12 +52,12 @@ ______
 
 ## Program Description
 
-VIBRANT is a tool for automated recovery and annotation of bacterial and archaeal viruses, determination of genome completeness, and characterization of virome function from metagenomic assemblies. VIBRANT uses neural networks of protein annotation signatures and genomic features to maximize identification of highly diverse partial or complete viral genomes as well as excise integrated proviruses.
+VIBRANT is a tool for automated recovery and annotation of bacterial and archaeal viruses, determination of genome completeness, and characterization of viral community function from metagenomic assemblies. VIBRANT uses neural networks of protein annotation signatures and genomic features to maximize identification of highly diverse partial or complete viral genomes as well as excise integrated proviruses.  
 
 * Uses neural network machine learning of protein annotation signatures
 * Asigns novel 'v-score' for determining the virus-like nature of all annotations
 * Determines genome completeness
-* Characterizes virome function by metabolic analysis
+* Characterizes viral community function by metabolic analysis
 * Identifies auxiliary metabolic genes (AMGs)
 * Excises integrated viral genomes from host scaffolds
 * Performs well in diverse environments
@@ -54,18 +72,18 @@ VIBRANT uses three databases for identifying viruses and characterizing virome m
 
 ## Requirements  
 *System Requirements:* VIBRANT has been tested and successfully run on Mac, Linux and Ubuntu systems.  
-*Program Dependancies:* Python3, Prodigal, HMMER3, gzip, tar, wget (see section below)  
-*Python Dependancies:* BioPython, Pandas, Matplotlib, Seaborn, Numpy, Scikit-learn, Pickle (see section below)  
+*Program Dependencies:* Python3, Prodigal, HMMER3, gzip, tar, wget (see section below)  
+*Python Dependencies:* BioPython, Pandas, Matplotlib, Seaborn, Numpy, Scikit-learn, Pickle (see section below)  
 
 Don't worry, these should all be easy and quick to install if you do not already have the requirements satisfied. Suggested methods of installation are with [1] pip (pip3) (https://pypi.org/project/pip/), [2] conda (https://anaconda.org/anaconda/conda), [3] homebrew (https://brew.sh/) or [4] apt (you make need to use 'apt-get' or 'sudo') (https://help.ubuntu.com/lts/serverguide/apt.html). The method will depend on your operating system and setup.  
 
-#### Program Dependancies: Installation  
+#### Program Dependencies: Installation  
 Please ensure the following programs are installed and in your machine's PATH. Note: most downloads will automatically place these programs in your PATH.
 
 ##### Programs:  
 1. Python3: https://www.python.org (version >= 3.5)
 2. Prodigal: https://github.com/hyattpd/Prodigal
-3. HMMER3: https://github.com/EddyRivasLab/hmmer (version == 3.1b has been identified to produce most consistent results with Pfam annotations)
+3. HMMER3: https://github.com/EddyRivasLab/hmmer
 4. gzip: http://www.gzip.org/
 5. tar: https://www.gnu.org/software/tar/
 6. wget: https://www.gnu.org/software/wget/
@@ -73,14 +91,14 @@ Please ensure the following programs are installed and in your machine's PATH. N
 ##### Example Installations:  
 1. Python3: see Python webpage. You can check your current version using `python --version`. Required version >= 3.5.
 2. Prodigal: `conda install -c bioconda prodigal` or `brew install prodigal` or `apt-get install prodigal` or GitHub clone
-3. HMMER3: `conda install -c bioconda hmmer` or `brew install hmmer` or `apt install hmmer` or GitHub clone (suggested to install version 3.1b)
+3. HMMER3: `conda install -c bioconda hmmer` or `brew install hmmer` or `apt install hmmer` or GitHub clone
 4. gzip: you likely already have this installed
 5. tar: you likely already have this installed
 6. wget: you likely already have this installed or `brew install wget` or `apt install wget` or `pip install wget`
 
 
-#### Python3 Dependancies: Installation  
-There are several Python3 dependancies that must be installed as well. You may already have some of these installed.
+#### Python3 Dependencies: Installation  
+There are several Python3 dependencies that must be installed as well. You may already have some of these installed.
 
 ##### Packages  
 1. BioPython: https://biopython.org/wiki/Download
@@ -88,7 +106,7 @@ There are several Python3 dependancies that must be installed as well. You may a
 3. Matplotlib: https://matplotlib.org/
 4. Seaborn: https://seaborn.pydata.org/
 5. Numpy: https://numpy.org/ (version >= 1.17.0)
-6. Scikit-learn: https://scikit-learn.org/stable/ (version 0.21.3)
+6. Scikit-learn: https://scikit-learn.org/stable/ (version == 0.21.3)
 7. Pickle: https://docs.python.org/3/library/pickle.html
 
 ##### Example Installations:  
@@ -109,7 +127,7 @@ VIBRANT is built for efficiently running on metagenomes but can also run on indi
 There are two different routes to downloading VIBRANT: [Anaconda](https://anaconda.org/bioconda/vibrant) install or [GitHub](https://github.com/AnantharamanLab/VIBRANT) clone/download.  
 
 ### Anaconda (updated January 22, 2020)  
-1) Install dependancies. See *Requirements* section above.
+1) Install dependencies. See *Requirements* section above.
 2) Install directly to PATH using conda.  
     `conda install -c bioconda vibrant`
 3) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires 20GB of temporary storage space and ~11.2GB of final storage space. To do this, run `download-db.sh` which should be in your system's PATH.  
@@ -118,7 +136,7 @@ There are two different routes to downloading VIBRANT: [Anaconda](https://anacon
 ### GitHub
 *Note:* if at any time you are given a "permission denied" error you can run `chmod 777 <file_name>` or `chmod -R 777 <folder_name>`. Simply repace `<file_name>` or `<folder_name>` with the file/folder that you would like to add permissions to.
 
-1) Install dependancies. See *Requirements* section above.
+1) Install dependencies. See *Requirements* section above.
 2) Download VIBRANT using git clone or download zip file.  *Note*: if you download the zip file you will have the parent folder `VIBRANT-master` instead of `VIBRANT`.  
     `git clone https://github.com/AnantharamanLab/VIBRANT`  
 3) You may want to add permissions to all files.  
@@ -128,8 +146,8 @@ There are two different routes to downloading VIBRANT: [Anaconda](https://anacon
     `cd VIBRANT/databases`  
 6) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires 20GB of temporary storage space and ~11.2GB of final storage space. Run the following:  
     `python3 VIBRANT_setup.py` or `./VIBRANT_setup.py`  
-7) VIBRANT can automatically verify that downloads, setup and installation of dependancies was completed properly. You may choose to skip this, but it's very quick. This script can be called as many times as necessary to run verifications.  
-    `python3 VIBRANT_test_setup.py` or `./VIBRANT_test_setup.py`  
+7) This step is included in step 6. This can be used if you have already completed step 6 and want to re-test the setup. VIBRANT can automatically verify that downloads, setup and installation of dependencies was completed properly. You may choose to skip this, but it's very quick. This flag can be called as many times as necessary to run verifications.  
+    `python3 VIBRANT_setup.py -test` or `./VIBRANT_setup.py -test`  
 
 
 ### Testing VIBRANT
@@ -164,16 +182,18 @@ VIBRANT comes with a couple of very simple optional arguments. At any point you 
 
 * `-f`: identify either nucleotide or protein input. This flag is only required when inputting proteins (`-f prot`) but can be added with any nucleotide input (`-f nucl`). Default = `nucl`.  
 
-* `-folder`: specify the directory in which to deposit VIBRANT's output folder. If the specified directory doesn't exist then it will be created. Default = your current working directory.  
+* `-folder`: specify the directory in which to deposit VIBRANT's output folder and tempoary files. If the specified directory doesn't exist then it will be created. Default = your current working directory.  
 
 *Uncommon optional arguments*
-* `-l`: increase the minimum scaffold length requirement. The minimum is 3000 basepairs (`-l 3000`). Default = `3000`. For example, if `-l 5000` is invoked VIBRANT will only consider scaffolds greater than or equal to 5000bp.  
+* `-l`: increase the minimum scaffold length requirement. The minimum is 1000 basepairs (`-l 1000`). Default = `1000`. For example, if `-l 5000` is invoked VIBRANT will only consider scaffolds greater than or equal to 5000bp.  
 * `-o`: increase the minimum number of open readings frames (ORFs, or proteins) per scaffold requirement. The minimum is 4 ORFs (`-o 4`). Default = `4`. For example, if `-o 8` is invoked VIBRANT will only consider scaffolds encoding at least 8 proteins.  
 * `-virome`: This flag should be used cautiously. This will edit VIBRANT's sensitivity if the input dataset is a virome and not mixed metagenome. That is, if you expect the vast majority of your input scaffolds to be viruses then `-virome` can be used to remove obvious non-viral scaffolds. This will have no effect on runtime. Default = off.  
 * `-no_plot`: This flag can be used to skip generation of the graphical representations of the VIBRANT's results. You may wish to use this flag if you simply have no use for the output figures or if for some reason this function of VIBRANT is causing the program to break. This will have little effect on runtime. Default = off.  
 
-*Unused optional arguments*
-There are several additional flags that will only be used if the hierarchy of the parent folder is modified. This will likely never apply.  
+*Likely unused optional arguments*
+* `-d`: specify the location of the `databases/` directory if moved from its default location.  
+* `-m`: specify the location of the `files/` directory if moved from its default location.  
+* For `-d` and `-m` please specify the full path to the new location of the files. For example, `-d new_location/databases/`.  
 
 
 ## Output Explanations  

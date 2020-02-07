@@ -1,8 +1,9 @@
 #! /usr/bin/env python3
-# Author: Kristopher Kieft, UW-Madison, 2019
+# Author: Kristopher Kieft, UW-Madison
 
-# VIBRANT v1.0.1
+# VIBRANT v1.1.0
 # Virus Identification By iteRative ANnoTation
+# Release date: Feb 7 2020
 
 # Usage: $ python3 VIBRANT_run.py -i <input_file> [options]
 
@@ -25,6 +26,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 import os
+import sklearn
 
 vibrant_path = str(os.path.dirname(os.path.abspath(__file__)))
 working_path = str(os.getcwd())
@@ -35,7 +37,7 @@ round((time.time() - start)/60,1)
 start_time = str(datetime.datetime.now().time()).rsplit(".",1)[0]
 
 vibrant = argparse.ArgumentParser(description='Usage: python3 VIBRANT_run.py -i <input_file> [options]. VIBRANT identifies bacterial and archaeal viruses (phages) from assembled metagenomic scaffolds or whole genomes, including the excision of integrated proviruses. VIBRANT also performs curation of identified viral scaffolds, estimation of viral genome completeness and analysis of viral metabolic capabilities.')
-vibrant.add_argument('--version', action='version', version='VIBRANT v1.0.1')
+vibrant.add_argument('--version', action='version', version='VIBRANT v1.1.0')
 
 ####### Required
 vibrant.add_argument('-i', type=str, nargs=1, required=True, help='input fasta file')
@@ -48,16 +50,9 @@ vibrant.add_argument('-l', type=str, nargs=1, default='1000', help='length in ba
 vibrant.add_argument('-o', type=str, nargs=1, default='4', help='number of ORFs per scaffold to limit input sequences [default=4, can increase but not decrease]')
 vibrant.add_argument('-virome', action='store_true', help='use this setting if dataset is known to be comprised mainly of viruses. More sensitive to viruses, less sensitive to false identifications [default=off]')
 vibrant.add_argument('-no_plot', action='store_true', help='suppress the generation of summary plots [default=off]')
-vibrant.add_argument('-k', type=str, nargs=1, default=str(vibrant_path) + '/databases/KEGG_profiles_prokaryotes.HMM', help='path to KEGG HMMs (if moved from default location)')
-vibrant.add_argument('-p', type=str, nargs=1, default=str(vibrant_path) + '/databases/Pfam-A_v32.HMM', help='path to Pfam HMMs (if moved from default location)')
-vibrant.add_argument('-v', type=str, nargs=1, default=str(vibrant_path) + '/databases/VOGDB94_phage.HMM', help='path to VOG HMMs (if moved from default location)')
-vibrant.add_argument('-e', type=str, nargs=1, default=str(vibrant_path) + '/databases/Pfam-A_plasmid_v32.HMM', help='path to plasmid HMMs (if moved from default location)')
-vibrant.add_argument('-a', type=str, nargs=1, default=str(vibrant_path) + '/databases/Pfam-A_phage_v32.HMM', help='path to viral-subset Pfam HMMs (if moved from default location)')
-vibrant.add_argument('-c', type=str, nargs=1, default=str(vibrant_path) + '/files/VIBRANT_categories.tsv', help='path to VIBRANT categories file (if moved from default location)')
-vibrant.add_argument('-n', type=str, nargs=1, default=str(vibrant_path) + '/files/VIBRANT_names.tsv', help='path to VIBRANT annotation to name file (if moved from default location)')
-vibrant.add_argument('-s', type=str, nargs=1, default=str(vibrant_path) + '/files/VIBRANT_KEGG_pathways_summary.tsv', help='path to VIBRANT summary of KEGG metabolism file (if moved from default location)')
-vibrant.add_argument('-m', type=str, nargs=1, default=str(vibrant_path) + '/files/VIBRANT_machine_model.sav', help='path to VIBRANT neural network machine learning model (if moved from default location)')
-vibrant.add_argument('-g', type=str, nargs=1, default=str(vibrant_path) + '/files/VIBRANT_AMGs.tsv', help='path to VIBRANT AMGs file (if moved from default location)')
+vibrant.add_argument('-d', type=str, nargs=1, default=str(vibrant_path) + '/databases/', help='path to original "databases" directory that contains .HMM files (if moved from default location)')
+vibrant.add_argument('-m', type=str, nargs=1, default=str(vibrant_path) + '/files/', help='path to original "files" directory that contains .tsv and model files (if moved from default location)')
+
 args = vibrant.parse_args()
 
 if type(args.f) == str:
@@ -75,26 +70,19 @@ if args.virome == False:
 elif args.virome == True:
     virome = ' -virome'
 suppress = args.no_plot
-if type(args.k) == str:
-	kegg_hmm = args.k
+
+if str(args.d) == str(vibrant_path) + '/databases/':
+	databases = str(args.d)
 else:
-	kegg_hmm = "".join(args.k[0])
-if type(args.p) == str:
-	pfam_hmm = args.p
+	databases = str(args.d[0])
+	if databases[-1] != '/':
+		databases += '/'
+if str(args.m) == str(vibrant_path) + '/files/':
+	files = str(args.m)
 else:
-	pfam_hmm = "".join(args.p[0])
-if type(args.v) == str:
-	vog_hmm = args.v
-else:
-	vog_hmm = "".join(args.v[0])
-if type(args.e) == str:
-	plasmid_hmm = args.e
-else:
-	plasmid_hmm = "".join(args.e[0])
-if type(args.a) == str:
-	vpfam_hmm = args.a
-else:
-	vpfam_hmm = "".join(args.a[0])
+	files = str(args.m[0])
+	if files[-1] != '/':
+		files += '/'
 if args.l == '1000':
 	lim_low = args.l
 if args.l != '1000':
@@ -107,31 +95,48 @@ if args.o == '4':
 	orf_low = args.o
 if args.o != '4':
 	orf_low = args.o[0]
-if type(args.c) == str:
-	categories = args.c
-else:
-	categories = "".join(args.c[0])
-if type(args.n) == str:
-	annotation_names = args.n
-else:
-	annotation_names = "".join(args.n[0])
-if type(args.m) == str:
-	model = args.m
-else:
-	model = "".join(args.m[0])
-if type(args.g) == str:
-	AMG_list = args.g
-else:
-	AMG_list = "".join(args.g[0])
-if type(args.s) == str:
-	summary_list = args.s
-else:
-	summary_list = "".join(args.s[0])
 try:
     filename = str(args.i[0].rsplit('/')[-1])
     filepath = str(args.i[0].rsplit('/')[0])
 except Exception:
     filename = str(args.i[0])
+
+if not os.path.exists(databases + 'KEGG_profiles_prokaryotes.HMM.h3f'):
+	print()
+	print("VIBRANT error: could not identify KEGG HMM files in database directory. Please run VIBRANT_setup.py.")
+	print()
+	exit()
+if not os.path.exists(databases + 'Pfam-A_v32.HMM.h3f'):
+	print()
+	print("VIBRANT error: could not identify Pfam HMM files in database directory. Please run VIBRANT_setup.py.")
+	print()
+	exit()
+if not os.path.exists(databases + 'VOGDB94_phage.HMM.h3f'):
+	print()
+	print("VIBRANT error: could not identify VOG HMM files in database directory. Please run VIBRANT_setup.py.")
+	print()
+	exit()
+if not os.path.exists(files + 'VIBRANT_categories.tsv'):
+	print()
+	print("VIBRANT error: could not identify VIBRANT_categories.tsv in files directory.")
+	print()
+	exit()
+if not os.path.exists(files + 'VIBRANT_AMGs.tsv'):
+	print()
+	print("VIBRANT error: could not identify VIBRANT_AMGs.tsv in files directory.")
+	print()
+	exit()
+if not os.path.exists(files + 'VIBRANT_names.tsv'):
+	print()
+	print("VIBRANT error: could not identify VIBRANT_names.tsv in files directory.")
+	print()
+	exit()
+if not os.path.exists(files + 'VIBRANT_machine_model.sav'):
+	print()
+	print("VIBRANT error: could not identify VIBRANT_machine_model.sav in files directory.")
+	print()
+	exit()
+
 
 #####
 base = str(filename.rsplit(".",1)[0])
@@ -148,7 +153,7 @@ elif os.path.exists(str(out_folder)):
 if int(orf_low) < 4 or int(lim_low) < 1000:
 	print("VIBRANT error: minimum ORFs is 4 and minimum sequence length is 1kb. These variables can only increase. Exiting." + "\n")
 	exit()
-command = ' -f ' + str(format) + ' -k ' + str(kegg_hmm) + ' -p ' + str(pfam_hmm) + ' -v ' + str(vog_hmm) + ' -e ' + str(plasmid_hmm) + ' -a ' + str(vpfam_hmm) + ' -c ' + str(categories) + ' -n ' + str(annotation_names) + ' -m ' + str(model) + ' -l ' + str(lim_low) + ' -o ' + str(orf_low) + str(virome) + ' -g ' + str(AMG_list)
+command = ' -f ' + str(format) + ' -d ' + str(databases) + ' -m ' + str(files) + ' -l ' + str(lim_low) + ' -o ' + str(orf_low) + str(virome)
 logging.basicConfig(filename=str(out_folder)+'VIBRANT_log_' + base + '.log', level=logging.INFO, format='%(message)s')
 subprocess.run("echo '' > " + str(out_folder)+base + "_four-orf-count.txt", shell=True)
 
@@ -629,7 +634,7 @@ if format == "nucl":
 			n += 7
 
 
-with open(annotation_names, 'r') as names:
+with open(str(files)+'VIBRANT_names.tsv', 'r') as names:
 	names = names.read().replace('\n','\t').split('\t')
 	names_dict = {}
 	n = 0
@@ -637,7 +642,7 @@ with open(annotation_names, 'r') as names:
 		names_dict.update({names[n]:names[n+1]})
 		n += 2
 
-with open(summary_list, 'r') as summary:
+with open(str(files)+'VIBRANT_KEGG_pathways_summary.tsv', 'r') as summary:
 	with open(str(out_folder)+'VIBRANT_AMG_individuals_' + str(base) + '.tsv', 'r') as annotations:
 		with open(str(out_folder)+'VIBRANT_AMG_counts_' + str(base) + '.tsv', 'w') as count_file:
 			with open(str(out_folder)+'VIBRANT_AMG_pathways_' + str(base) + '.tsv', 'w') as path_file:
@@ -817,13 +822,23 @@ time.sleep(0.1)
 #
 #
 #
+note = ''
+if str(sklearn.__version__) != '0.21.3':
+    if int(str(sklearn.__version__).split(".")[1]) > 21 or int(str(sklearn.__version__).split(".")[2]) > 3:
+        note = 'CAUTION: running a version of Scikit-Learn higher than v0.21.3 may cause issues. With pip you can update by running "pip install --upgrade scikit-learn==0.21.3".'
+    elif int(str(sklearn.__version__).split(".")[1]) < 21 or int(str(sklearn.__version__).split(".")[2]) < 3:
+        note = 'CAUTION: running a version of Scikit-Learn lower than v0.21.3 will likely cause issues. With pip you can update by running "pip install --upgrade scikit-learn==0.21.3".'
+if str(np.version.version) != '1.17.0':
+    if int(str(np.version.version).split(".")[0]) < 1 or int(str(np.version.version).split(".")[1]) < 17:
+        note = 'CAUTION: running a version of Numpy lower than v1.17.0 will likely cause issues. With pip you can update by running "pip install --upgrade numpy==1.17.0".'
+
 log_command = sys.argv
 logging.info("Command:  " + str(" ".join(log_command)))
 logging.info("Date:     " + str(date.today()))
 logging.info("Start:    " + str(start_time))
 logging.info("End:      " + str(datetime.datetime.now().time()).rsplit(".",1)[0])
 logging.info("Runtime:  " + str(round((time.time() - float(start))/60,1)) + " minutes")
-logging.info("Program:  VIBRANT v1.0.1")
+logging.info("Program:  VIBRANT v1.1.0")
 logging.info("\n")
 logging.info(str(sequences) + " scaffolds were read in.")
 if format == "nucl":
@@ -832,6 +847,7 @@ if format == "prot":
 	logging.info(str(grep_out_count) + " scaffolds met the minimum requirement: at least " + str(orf_low) + " ORFs.")
 logging.info(str(out_phages) + " putative phages were identified.")
 logging.info("\n")
+logging.info(str(note))
 logging.info('                                                               ##')
 logging.info('                                                             ##  ##')
 logging.info('                                                           ##      ##')
