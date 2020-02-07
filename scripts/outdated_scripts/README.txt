@@ -1,1 +1,0 @@
-This folder serves as a repository for outdated VIBRANT scripts. Outdated scripts should not be used to replace updated scripts. 
