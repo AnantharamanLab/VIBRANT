@@ -297,10 +297,12 @@ if no_contigs == False:
 		cat_file = str('mv ' + infile+'.first_pass_mid-high.faa' + ' ' + infile+'.appended.faa')
 		subprocess.run(cat_file, shell=True)
 	else:
+		subprocess.run('rm ' + infile+'*.faa 2> /dev/null', shell=True)
 		exit()
 
 else:
 	if len(low_switch) == 0:
+		subprocess.run('rm ' + infile+'*.faa 2> /dev/null', shell=True)
 		exit()
 	else:
 		subprocess.call(['mv', infile+'.first_pass_low.faa', infile+'.appended.faa'])
@@ -318,6 +320,7 @@ with open(infile+'.appended.faa', 'r') as write_fasta:
 			master.write(name + '\t' + str(name.rsplit("_",1)[0]) + '\n')
 			counter += 1
 if counter == 0:
+	subprocess.run('rm ' + infile+'*.faa 2> /dev/null', shell=True)
 	exit()
 
 ###########################  Run/Parse KEGG hmmsearch ##########################
@@ -1580,6 +1583,7 @@ with open(str(path)+'temp1_VIBRANT_annotations.' + str(base) + '.txt', 'r') as a
 					ORFs.append(total_genes)
 
 if len(ORFs) == 0:
+	subprocess.run('rm ' + infile+'*.faa 2> /dev/null', shell=True)
 	exit()
 
 ### Run neural network (MLPClassifier)
@@ -1854,9 +1858,8 @@ with open(infile + '_genome_quality.out', 'w') as quality:
 if len(viral_genomes) == 0:
 	subprocess.call('rm '+str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt'+' 2>/dev/null', shell=True)
 	subprocess.call('rm '+str(path)+'temp_VIBRANT_results.' + str(base) + '.txt'+' 2>/dev/null', shell=True)
-	subprocess.call('rm '+str(path)+str(base)+'.pass.faa'+' 2>/dev/null', shell=True)
-	subprocess.call('rm '+str(path)+str(base)+'.appended*faa'+' 2>/dev/null', shell=True)
-	subprocess.call('rm '+str(path)+str(base)+'.master.txt'+' 2>/dev/null', shell=True)
+	subprocess.call('rm '+infile+'*.faa'+' 2>/dev/null', shell=True)
+	subprocess.call('rm '+infile+'.master.txt'+' 2>/dev/null', shell=True)
 	exit()
 
 for protein in final_check:
@@ -2073,9 +2076,9 @@ if format == "nucl":
 ####### remove files
 subprocess.call('rm '+str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt'+' 2>/dev/null', shell=True)
 subprocess.call('rm '+str(path)+'temp_VIBRANT_results.' + str(base) + '.txt'+' 2>/dev/null', shell=True)
-subprocess.call('rm '+str(path)+str(base)+'.pass.faa'+' 2>/dev/null', shell=True)
-subprocess.call('rm '+str(path)+str(base)+'.appended*faa'+' 2>/dev/null', shell=True)
-subprocess.call('rm '+str(path)+str(base)+'.master.txt'+' 2>/dev/null', shell=True)
+subprocess.call('rm '+infile+'.pass.faa'+' 2>/dev/null', shell=True)
+subprocess.call('rm '+infile+'.appended*faa'+' 2>/dev/null', shell=True)
+subprocess.call('rm '+infile+'.master.txt'+' 2>/dev/null', shell=True)
 
 
                                                                ##')
