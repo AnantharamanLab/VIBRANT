@@ -65,7 +65,7 @@ Please ensure the following programs are installed and in your machine's PATH. N
 ##### Programs:  
 1. Python3: https://www.python.org (version >= 3.5)
 2. Prodigal: https://github.com/hyattpd/Prodigal
-3. HMMER3: https://github.com/EddyRivasLab/hmmer
+3. HMMER3: https://github.com/EddyRivasLab/hmmer (version == 3.1b has been identified to produce most consistent results with Pfam annotations)
 4. gzip: http://www.gzip.org/
 5. tar: https://www.gnu.org/software/tar/
 6. wget: https://www.gnu.org/software/wget/
@@ -73,7 +73,7 @@ Please ensure the following programs are installed and in your machine's PATH. N
 ##### Example Installations:  
 1. Python3: see Python webpage. You can check your current version using `python --version`. Required version >= 3.5.
 2. Prodigal: `conda install -c bioconda prodigal` or `brew install prodigal` or `apt-get install prodigal` or GitHub clone
-3. HMMER3: `conda install -c bioconda hmmer` or `brew install hmmer` or `apt install hmmer` or GitHub clone
+3. HMMER3: `conda install -c bioconda hmmer` or `brew install hmmer` or `apt install hmmer` or GitHub clone (suggested to install version 3.1b)
 4. gzip: you likely already have this installed
 5. tar: you likely already have this installed
 6. wget: you likely already have this installed or `brew install wget` or `apt install wget` or `pip install wget`
