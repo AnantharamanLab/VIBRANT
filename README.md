@@ -20,13 +20,13 @@ Kieft, K., Zhou, Z., and Anantharaman, K. (2019). VIBRANT: Automated recovery, a
 ______
 ## Updates for v1.2.0 (Feb 9 2020):  
 #### Summary:  
-* Update: pre-filtration of scaffolds based on strand switching was completely removed. This modification was found to increase virus identification with no effect on the rate of false positive discovery.  
+* Update: pre-filtration of scaffolds based on strand switching was completely removed. This modification was found to increase virus identification with a negligible effect on the rate of false positive discovery.  
 * Note: two of the HMM databases are no longer required (Pfam-A_phage and Pfam-A_plasmid). You may want to remove these. There is no need to re-download or re-compile the other databases, though you can delete all databases and start over.  
 * Note: results of virus identification may increase compared to previous versions.  
 
 ______
-## Updates for v1.1.0 (Feb 7 2020):  
-#### Summary:  
+### Updates for v1.1.0 (Feb 7 2020):  
+##### Summary:  
 * Issue: incorrect storage of strand switching information caused inconsistent results and potential decrease in virus recovery. Issue is now resolved.  
 * Update: modification of `hmmsearch` command to increase speed if using a newer version (version >= 3.2.1).  
 * Update: addition of `-folder` flag and compression of databases (`-d`) and files flags (`-m`).  
@@ -36,7 +36,7 @@ ______
 * Note: results of virus identification may vary compared to v1.0.1.  
 * Note: please verify Scikit-Learn and numpy versions. Incorrect versions may cause inconsistent and invalid results.  
 
-#### Explanations:  
+##### Explanations:  
 * Fixed a bug that was causing strand switching information to be stored with the wrong scaffolds. This caused scaffolds to undergo potentially incorrect pre-filtering (see flowchart and methods). Due to this issue, viral scaffolds may have been filtered out accidentally. This also led to inconsistent results between identical runs of VIBRANT because the same scaffold was given various strand switching information depending on the run. Both issues of incorrect strand switching and inconsistent results have been resolved.  
 * The usage of `hmmsearch --cpu` changed with newer versions of HMMER (version >= 3.2.1). For older versions the command used by VIBRANT is `--cpu 1` whereas newer versions `--cpu 0` is used. VIBRANT will automatically detect your version and use the appropriate command. This increases speed by optimizing cpu usage.  
 * The new `-folder` flag allows for the designation of an output directory to deposit the final VIBRANT output as well as all temporary files. When invoked this flag will create the new directory if it does not exist or add to the directory if it already exists. This may especially be useful when running VIBRANT on a shared computing cluster. The new `-d` and `-m` flags are useful if you have moved the location of the `databases/` and/or `files/` directories from their default location. Previously this required several flags that have now been condensed to two.  
