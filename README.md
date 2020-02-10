@@ -137,14 +137,14 @@ There are two different routes to downloading VIBRANT: [Anaconda](https://anacon
 * VIBRANT app: https://de.cyverse.org/de/?type=apps&app-id=c2864d3c-fd03-11e9-9cf4-008cfa5ae621&system-id=de
 * Information: https://wiki.cyverse.org/wiki/display/DEapps/VIBRANT-1.0.1
 
-### Anaconda (currently running v1.0.1)  
+### Anaconda (currently running v1.2.0)  
 1) Install dependencies. See *Requirements* section above.
 2) Install directly to PATH using conda.  
     `conda install -c bioconda vibrant`
 3) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires 20GB of temporary storage space and ~11.2GB of final storage space. To do this, run `download-db.sh` which should be in your system's PATH.  
     `download-db.sh`
 
-### GitHub
+### GitHub (currently running v1.2.0)  
 *Note:* if at any time you are given a "permission denied" error you can run `chmod 777 <file_name>` or `chmod -R 777 <folder_name>`. Simply repace `<file_name>` or `<folder_name>` with the file/folder that you would like to add permissions to.
 
 1) Install dependencies. See *Requirements* section above.
