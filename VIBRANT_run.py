@@ -1,9 +1,9 @@
 #! /usr/bin/env python3
 # Author: Kristopher Kieft, UW-Madison
 
-# VIBRANT v1.1.0
+# VIBRANT v1.2.0
 # Virus Identification By iteRative ANnoTation
-# Release date: Feb 7 2020
+# Release date: Feb 9 2020
 
 # Usage: $ python3 VIBRANT_run.py -i <input_file> [options]
 
@@ -36,8 +36,8 @@ round((time.time() - start)/60,1)
 
 start_time = str(datetime.datetime.now().time()).rsplit(".",1)[0]
 
-vibrant = argparse.ArgumentParser(description='Usage: python3 VIBRANT_run.py -i <input_file> [options]. VIBRANT identifies bacterial and archaeal viruses (phages) from assembled metagenomic scaffolds or whole genomes, including the excision of integrated proviruses. VIBRANT also performs curation of identified viral scaffolds, estimation of viral genome completeness and analysis of viral metabolic capabilities.')
-vibrant.add_argument('--version', action='version', version='VIBRANT v1.1.0')
+vibrant = argparse.ArgumentParser(description='Usage: python3 VIBRANT_run.py -i <input_file> [options].\n VIBRANT identifies bacterial and archaeal viruses (phages) from assembled metagenomic scaffolds or whole genomes, including the excision of integrated proviruses. VIBRANT also performs curation of identified viral scaffolds, estimation of viral genome completeness and analysis of viral metabolic capabilities.')
+vibrant.add_argument('--version', action='version', version='VIBRANT v1.2.0')
 
 ####### Required
 vibrant.add_argument('-i', type=str, nargs=1, required=True, help='input fasta file')
@@ -341,15 +341,15 @@ if format == "nucl":
                         else:
                             n += 1
 
-f1 = subprocess.Popen('rm ' + str(out_folder)+base + '*parallel-runs*phages_*.faa 2>/dev/null', shell=True)
+subprocess.run('rm ' + str(out_folder)+base + '*parallel-runs*phages_*.faa 2>/dev/null', shell=True)
 subprocess.Popen('rm ' + str(out_folder)+base + '*parallel-runs*phages_*.ffn 2>/dev/null', shell=True)
 subprocess.Popen('rm ' + str(out_folder)+base + '*parallel-runs*phages_*.fna 2>/dev/null', shell=True)
-f1.wait()
-cat_faa = 'cat ' + str(out_folder)+base + '.parallel-runs_*.faa > ' + str(out_folder)+base + '.prodigal.faa 2>/dev/null'
-subprocess.Popen(cat_faa, shell=True)
+
 if format == 'nucl':
 	cat_ffn = 'cat ' + str(out_folder)+base + '.parallel-runs_*.ffn > ' + str(out_folder)+base + '.prodigal.ffn 2>/dev/null'
 	subprocess.Popen(cat_ffn, shell=True)
+	cat_faa = 'cat ' + str(out_folder)+base + '.parallel-runs_*.faa > ' + str(out_folder)+base + '.prodigal.faa 2>/dev/null'
+	subprocess.Popen(cat_faa, shell=True)
 cat_annotations = 'cat '+str(out_folder)+'VIBRANT_annotations*' + base + '* > '+str(out_folder)+'temp_VIBRANT_annotations_' + str(base) + '.txt 2>/dev/null'
 p6 = subprocess.Popen(cat_annotations, shell=True)
 cat_results = 'cat '+str(out_folder)+'VIBRANT_results*' + base + '* > '+str(out_folder)+'temp_VIBRANT_results_' + str(base) + '.txt 2>/dev/null'
@@ -435,24 +435,12 @@ vog_cat = 'cat ' + str(out_folder)+base + '*VOG.hmmtbl.parse.out 1> ' + str(out_
 x3 = subprocess.Popen(vog_cat, shell=True)
 vog_table = 'cat ' + str(out_folder)+base + '*VOG.hmmtbl 1> ' + str(out_folder)+base + '_unformatted_VOG.hmmtbl 2>/dev/null'
 y3 = subprocess.Popen(vog_table, shell=True)
-vpfam_cat = 'cat ' + str(out_folder)+base + '*vpfam.hmmtbl.parse.out 1> ' + str(out_folder)+base + '.vpfam_hmmtbl_parse.txt 2>/dev/null'
-vpfam_table = 'cat ' + str(out_folder)+base + '*vpfam.hmmtbl 1> ' + str(out_folder)+base + '_unformatted_vpfam.hmmtbl 2>/dev/null'
-x4 = subprocess.Popen(vpfam_cat, shell=True)
-y4 = subprocess.Popen(vpfam_table, shell=True)
-plasmid_cat = 'cat ' + str(out_folder)+base + '*plasmid.hmmtbl.parse.out 1> ' + str(out_folder)+base + '.plasmid_hmmtbl_parse.txt 2>/dev/null'
-plasmid_table = 'cat ' + str(out_folder)+base + '*plasmid.hmmtbl 1> ' + str(out_folder)+base + '_unformatted_plasmid.hmmtbl 2>/dev/null'
-x5 = subprocess.Popen(plasmid_cat, shell=True)
-y5 = subprocess.Popen(plasmid_table, shell=True)
 x1.wait()
 x2.wait()
 x3.wait()
-x4.wait()
 y1.wait()
 y2.wait()
 y3.wait()
-y4.wait()
-y5.wait()
-x5.wait()
 time.sleep(0.1)
 
 move_parse = 'mv ' + str(out_folder)+base + '*_hmmtbl_parse.txt ' + str(out_folder)+'VIBRANT_HMM_tables_parsed_'+base + ' 2>/dev/null'
@@ -484,16 +472,15 @@ subprocess.Popen(rm_list, shell=True)
 subprocess.Popen(rm_temp, shell=True)
 subprocess.Popen(rm_names, shell=True)
 
-cat1_faa = "cat " + str(out_folder)+base + ".prodigal.faa | sed 's/$~&/ /g' 1> " + str(out_folder)+base + ".temp.faa 2>/dev/null"
-cat2_faa = "cat " + str(out_folder)+base + ".temp.faa | sed 's/^@%/\"/g' 1> " + str(out_folder)+base + ".prodigal.faa 2>/dev/null"
-rm1 = 'rm ' + str(out_folder)+base + '.prodigal.faa 2>/dev/null'
-subprocess.run(cat1_faa, shell=True)
-subprocess.run(rm1, shell=True)
-subprocess.run(cat2_faa, shell=True)
-subprocess.run("rm " + str(out_folder)+base + ".temp.faa 2>/dev/null", shell=True)
-time.sleep(0.1)
-
 if format == "nucl":
+    cat1_faa = "cat " + str(out_folder)+base + ".prodigal.faa | sed 's/$~&/ /g' 1> " + str(out_folder)+base + ".temp.faa 2>/dev/null"
+    cat2_faa = "cat " + str(out_folder)+base + ".temp.faa | sed 's/^@%/\"/g' 1> " + str(out_folder)+base + ".prodigal.faa 2>/dev/null"
+    rm1 = 'rm ' + str(out_folder)+base + '.prodigal.faa 2>/dev/null'
+    subprocess.run(cat1_faa, shell=True)
+    subprocess.run(rm1, shell=True)
+    subprocess.run(cat2_faa, shell=True)
+    subprocess.run("rm " + str(out_folder)+base + ".temp.faa 2>/dev/null", shell=True)
+    time.sleep(0.1)
     cat1_ffn = "cat " + str(out_folder)+base + ".prodigal.ffn | sed 's/$~&/ /g' 1> " + str(out_folder)+base + ".temp.ffn 2>/dev/null"
     cat2_ffn = "cat " + str(out_folder)+base + ".temp.ffn | sed 's/^@%/\"/g' 1> " + str(out_folder)+base + ".prodigal.ffn 2>/dev/null"
     cat_gff = "cat " + str(out_folder)+base + "*temp.gff 1> " + str(out_folder)+base + ".all.gff 2>/dev/null"
@@ -838,7 +825,7 @@ logging.info("Date:     " + str(date.today()))
 logging.info("Start:    " + str(start_time))
 logging.info("End:      " + str(datetime.datetime.now().time()).rsplit(".",1)[0])
 logging.info("Runtime:  " + str(round((time.time() - float(start))/60,1)) + " minutes")
-logging.info("Program:  VIBRANT v1.1.0")
+logging.info("Program:  VIBRANT v1.2.0")
 logging.info("\n")
 logging.info(str(sequences) + " scaffolds were read in.")
 if format == "nucl":
@@ -867,7 +854,7 @@ logging.info("\n")
 if format == "nucl":
 	subprocess.run('mv ' + str(out_folder)+base + '.prodigal.ffn ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
 	subprocess.run('mv ' + str(out_folder)+base + '.prodigal.gff ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
-subprocess.run('mv ' + str(out_folder)+base + '.prodigal.faa ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
+	subprocess.run('mv ' + str(out_folder)+base + '.prodigal.faa ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
 subprocess.run('mv '+str(out_folder)+'VIBRANT*' + base + ' ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
 subprocess.run('mv '+str(out_folder)+'VIBRANT*' + base + '.log ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
 time.sleep(0.1)
