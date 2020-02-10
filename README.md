@@ -4,7 +4,7 @@
 ### Virus Identification By iteRative ANnoTation
 
 
-02/07/2020   
+02/09/2020   
 Kristopher Kieft  
 Anantharaman Lab  
 University of Wisconsin-Madison  
@@ -12,11 +12,18 @@ kieft@wisc.edu
 
 
 ## Version
-VIBRANT v1.1.0  
+VIBRANT v1.2.0  
 
 ## Citation
 If you find VIBRANT useful please consider citing our preprint on [bioRxiv](https://www.biorxiv.org/content/10.1101/855387v1):  
 Kieft, K., Zhou, Z., and Anantharaman, K. (2019). VIBRANT: Automated recovery, annotation and curation of microbial viruses, and evaluation of virome function from genomic sequences. BioRxiv 855387.  
+______
+## Updates for v1.2.0 (Feb 9 2020):  
+#### Summary:  
+* Update: pre-filtration of scaffolds based on strand switching was completely removed. This modification was found to increase virus identification with no effect on the rate of false positive discovery.  
+* Note: two of the HMM databases are no longer required (Pfam-A_phage and Pfam-A_plasmid). You may want to remove these. There is no need to re-download or re-compile the other databases, though you can delete all databases and start over.  
+* Note: results of virus identification may increase compared to previous versions.  
+
 ______
 ## Updates for v1.1.0 (Feb 7 2020):  
 #### Summary:  
@@ -124,9 +131,13 @@ There are several Python3 dependencies that must be installed as well. You may a
 VIBRANT is built for efficiently running on metagenomes but can also run on individual or small groups of genomes. Each scaffold is considered individually, so results will *not* vary whether the scaffold is run as part of a metagenome or by itself.  
 
 ### Quick Start
-There are two different routes to downloading VIBRANT: [Anaconda](https://anaconda.org/bioconda/vibrant) install or [GitHub](https://github.com/AnantharamanLab/VIBRANT) clone/download.  
+There are two different routes to downloading VIBRANT: [Anaconda](https://anaconda.org/bioconda/vibrant) install or [GitHub](https://github.com/AnantharamanLab/VIBRANT) clone/download. Alternatively you can use the [CyVerse Discovery Environment](https://de.cyverse.org/de/) open source web server.  
 
-### Anaconda (updated January 22, 2020)  
+### CyVerse (currently running v1.0.1)  
+* VIBRANT app: https://de.cyverse.org/de/?type=apps&app-id=c2864d3c-fd03-11e9-9cf4-008cfa5ae621&system-id=de
+* Information: https://wiki.cyverse.org/wiki/display/DEapps/VIBRANT-1.0.1
+
+### Anaconda (currently running v1.0.1)  
 1) Install dependencies. See *Requirements* section above.
 2) Install directly to PATH using conda.  
     `conda install -c bioconda vibrant`
