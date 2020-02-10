@@ -25,7 +25,7 @@ ______
 * Note: results of virus identification may increase compared to previous versions.  
 
 ______
-### Updates for v1.1.0 (Feb 7 2020):  
+#### Updates for v1.1.0 (Feb 7 2020):  
 ##### Summary:  
 * Issue: incorrect storage of strand switching information caused inconsistent results and potential decrease in virus recovery. Issue is now resolved.  
 * Update: modification of `hmmsearch` command to increase speed if using a newer version (version >= 3.2.1).  
