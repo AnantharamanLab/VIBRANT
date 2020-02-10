@@ -238,7 +238,7 @@ if format == "nucl":
 		subprocess.run('rm ' + str(out_folder)+str(base)+'_four-orf-count.txt 2>/dev/null', shell=True)
 		subprocess.run('rm ' +str(out_folder)+'VIBRANT_log_' + str(base) + '.log 2>/dev/null', shell=True)
 		print("\n")
-		print('No phages found. There were either no scaffolds at least ' + str(lim_low) + 'bp (set minimum size) or the input file (-i) format (-f) was not FASTA nucleotide. Exiting.')
+		print('No phages found. There were either no scaffolds at least ' + str(lim_low) + 'bp or ' + str(orf_low) + ' ORFs (set minimum size), or the input file (-i) format (-f) was not FASTA nucleotide. Exiting.')
 		print("\n")
 		exit()
 
@@ -253,7 +253,7 @@ if format == "prot":
 		subprocess.run('rm ' + str(out_folder)+str(base)+'_four-orf-count.txt 2>/dev/null', shell=True)
 		subprocess.run('rm '+str(out_folder)+'VIBRANT_log_' + str(base) + '.log 2>/dev/null', shell=True)
 		print("\n")
-		print("No phages found. There were either no scaffolds at least ' + str(orf_low) + ' ORFs (set minimum size) or VIBRANT never found any proteins. Verify input file (-i) format (-f) is FASTA protein. Exiting.")
+		print("No phages found. There were either no scaffolds at least " + str(orf_low) + " ORFs (set minimum size) or VIBRANT never found any proteins. Verify input file (-i) format (-f) is FASTA protein. Exiting.")
 		exit()
 
 remove = 'rm ' + str(out_folder)+str(base) + '.parallel-runs_*.txt'
