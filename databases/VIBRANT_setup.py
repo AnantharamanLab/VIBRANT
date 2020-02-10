@@ -1,9 +1,9 @@
 #! /usr/bin/env python3
 # Author: Kristopher Kieft, UW-Madison
 
-# VIBRANT v1.1.0
+# VIBRANT v1.2.0
 # Virus Identification By iteRative ANnoTation
-# Release date: Feb 7 2020
+# Release date: Feb 9 2020
 
 # Usage: $ python3 VIBRANT_setup.py
 
@@ -17,7 +17,7 @@ from io import StringIO
 import logging
 
 vibrant = argparse.ArgumentParser(description='Usage: python3 VIBRANT_setup.py.')
-vibrant.add_argument('--version', action='version', version='VIBRANT v1.1.0')
+vibrant.add_argument('--version', action='version', version='VIBRANT v1.2.0')
 vibrant.add_argument('-test', action='store_true', help='use this setting if you only want to test downloads/dependencies [default=off]')
 vibrant.add_argument('-force', action='store_true', help='use this setting if this script is exiting and telling you to install a package/program that you know is already installed [default=off]')
 args = vibrant.parse_args()
@@ -27,14 +27,14 @@ parent_path = str(os.path.dirname(os.path.abspath(__file__)).rsplit("/",1)[0])
 if args.test == False:
     print()
     print("This script will download, extract subsets and press HMM profiles for VIBRANT.")
-    print("This process will require 20GB of temporary free storage space, but the final size requirement is ~11.2GB in the form of pressed HMM databases.")
+    print("This process will require ~20GB of temporary free storage space, but the final size requirement is ~11GB in the form of pressed HMM databases.")
     print("Please be patient. This only needs to be run once and will take a few minutes.")
     print("Logger started. Check log file for messages and errors.")
 
     logging.basicConfig(filename=str(parent_path) + '/databases/VIBRANT_setup.log', level=logging.INFO, format='%(message)s')
     logging.info = logging.info
     logging.info("This script will download, extract subsets and press HMM profiles for VIBRANT.")
-    logging.info("This process will require 20GB of temporary free storage space, but the final size requirement is ~11.2GB in the form of pressed HMM databases.")
+    logging.info("This process will require ~20GB of temporary free storage space, but the final size requirement is ~11GB in the form of pressed HMM databases.")
     logging.info("Please be patient. This only needs to be run once and will take a few minutes.")
     logging.info('')
 
@@ -135,12 +135,8 @@ if args.test == False:
     logging.info("Extracting profiles used for VIBRANT ...")
     e1 = subprocess.Popen('hmmfetch -o VOGDB94_phage.HMM -f vog_temp.HMM profile_names/VIBRANT_vog_profiles.txt >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
     e2 = subprocess.Popen('hmmfetch -o KEGG_profiles_prokaryotes.HMM -f kegg_temp.HMM profile_names/VIBRANT_kegg_profiles.txt >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
-    e3 = subprocess.Popen('hmmfetch -o Pfam-A_plasmid_v32.HMM -f Pfam-A.hmm profile_names/VIBRANT_pfam-plasmid_profiles.txt >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
-    e4 = subprocess.Popen('hmmfetch -o Pfam-A_phage_v32.HMM -f Pfam-A.hmm profile_names/VIBRANT_pfam-phage_profiles.txt >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
     e1.wait()
     e2.wait()
-    e3.wait()
-    e4.wait()
     time.sleep(0.1)
     r1 = subprocess.Popen('rm vog_temp.HMM kegg_temp.HMM vog.hmm.tar.gz profiles.tar.gz', shell=True)
     r2 = subprocess.Popen('mv Pfam-A.hmm Pfam-A_v32.HMM', shell=True)
@@ -152,14 +148,10 @@ if args.test == False:
     logging.info("Pressing profiles used for VIBRANT ...")
     p1 = subprocess.Popen('hmmpress VOGDB94_phage.HMM >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
     p2 = subprocess.Popen('hmmpress KEGG_profiles_prokaryotes.HMM >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
-    p3 = subprocess.Popen('hmmpress Pfam-A_plasmid_v32.HMM >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
-    p4 = subprocess.Popen('hmmpress Pfam-A_phage_v32.HMM >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
-    p5 = subprocess.Popen('hmmpress Pfam-A_v32.HMM >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
+    p3 = subprocess.Popen('hmmpress Pfam-A_v32.HMM >> '+ str(parent_path) + '/databases/VIBRANT_setup.log', shell=True)
     p1.wait()
     p2.wait()
     p3.wait()
-    p4.wait()
-    p5.wait()
     time.sleep(0.1)
 
     logging.info('')
@@ -236,16 +228,6 @@ listing_shell = subprocess.check_output(listing, shell=True)
 listing = str(listing_shell.strip()).split("'")[1]
 kegg = str(listing.split("\\n")[0].split(" ",1)[0])
 
-listing = 'grep -c "NAME" ' + str(parent_path) + '/databases/Pfam-A_phage_v32.HMM'
-listing_shell = subprocess.check_output(listing, shell=True)
-listing = str(listing_shell.strip()).split("'")[1]
-pfam_phage = str(listing.split("\\n")[0].split(" ",1)[0])
-
-listing = 'grep -c "NAME" ' + str(parent_path) + '/databases/Pfam-A_plasmid_v32.HMM'
-listing_shell = subprocess.check_output(listing, shell=True)
-listing = str(listing_shell.strip()).split("'")[1]
-pfam_plasmid = str(listing.split("\\n")[0].split(" ",1)[0])
-
 listing = 'grep -c "NAME" ' + str(parent_path) + '/databases/Pfam-A_v32.HMM	'
 listing_shell = subprocess.check_output(listing, shell=True)
 listing = str(listing_shell.strip()).split("'")[1]
@@ -275,12 +257,6 @@ except Exception as e:
 if str(kegg) != "10033":
     logging.info("VIBRANT Error: it looks like the KEGG HMM profiles were not downloaded/pressed correctly. Try re-running the VIBRANT_setup.py script.")
     error += 1
-if str(pfam_phage) != "894":
-    logging.info("VIBRANT Error: it looks like the Pfam phage HMM profiles were not downloaded/pressed correctly. Try re-running the VIBRANT_setup.py script.")
-    error += 1
-if str(pfam_plasmid) != "202":
-    logging.info("VIBRANT Error: it looks like the Pfam plasmid HMM profiles were not downloaded/pressed correctly. Try re-running the VIBRANT_setup.py script.")
-    error += 1
 if str(pfam) != "17929":
     logging.info("VIBRANT Error: it looks like the Pfam HMM profiles were not downloaded/pressed correctly. Try re-running the VIBRANT_setup.py script.")
     error += 1
@@ -294,11 +270,11 @@ if error > 0:
 
 if error == 0:
     logging.info('')
-    logging.info("VIBRANT v1.1.0 is good to go!")
+    logging.info("VIBRANT v1.2.0 is good to go!")
     logging.info('See example_data/ for quick test files.')
     logging.info('')
 
 print()
-print("VIBRANT v1.1.0 is good to go!")
+print("VIBRANT v1.2.0 is good to go!")
 print("See example_data/ for quick test files.")
 print()
