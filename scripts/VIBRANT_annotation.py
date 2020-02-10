@@ -1,9 +1,9 @@
 #! /usr/bin/env python3
 # Author: Kristopher Kieft, UW-Madison
 
-# VIBRANT v1.1.0
+# VIBRANT v1.2.0
 # Virus Identification By iteRative ANnoTation
-# Release date: Feb 7 2020
+# Release date: Feb 9 2020
 
 # Usage: see VIBRANT_run.py
 
@@ -23,7 +23,7 @@ import pickle
 
 ############################### Set Arguments  #################################
 vibrant = argparse.ArgumentParser(description='See main wrapper script: VIBRANT_run.py. This script performs the bulk of the work but is not callable on its own.')
-vibrant.add_argument('--version', action='version', version='VIBRANT v1.1.0')
+vibrant.add_argument('--version', action='version', version='VIBRANT v1.2.0')
 
 ####### Required
 vibrant.add_argument('-i', type=str, nargs=1, required=True, help='input fasta file')
@@ -42,8 +42,6 @@ input = str(args.i[0])
 kegg_hmm = str(args.d[0]) + 'KEGG_profiles_prokaryotes.HMM'
 pfam_hmm = str(args.d[0]) + 'Pfam-A_v32.HMM'
 vog_hmm = str(args.d[0]) + 'VOGDB94_phage.HMM'
-plasmid_hmm = str(args.d[0]) + 'Pfam-A_plasmid_v32.HMM'
-vpfam_hmm = str(args.d[0]) + 'Pfam-A_phage_v32.HMM'
 virome = args.virome
 lim_low = int(args.l[0])
 orf_low = int(args.o[0])
@@ -108,7 +106,6 @@ with open(str(in_proteins), 'r') as write_fasta:
 			n -= 1
 		check_first += 1
 
-# Last contig is not added in previous section
 if base_count >= int(orf_low)-1:
 	correct.append(basenames[-1])
 
@@ -119,212 +116,21 @@ for item in correct:
 	if item != "":
 		subprocess.run("echo '1' >> " + str(path)+str(in_base) + "_four-orf-count.txt", shell=True)
 
-####### write out genomes with correct number of ORFs
 with open(str(in_proteins), 'r') as write_fasta:
-	with open(infile+'.strand_switch.faa', 'w') as switch:
+	with open(infile+'.appended.faa', 'w') as switch:
 		for definition, sequences in SimpleFastaParser(write_fasta):
 			if format == "nucl":
 				if str(definition).split(" # ")[0].rsplit("_",1)[0] in correct:
-					switch.write('>' + (str(definition).split(" # ")[0]+"_"+str(definition).split(" # ")[3].strip("~")) + '\n' + str(sequences) + '\n')
+					switch.write('>' + (str(definition).split(" # ")[0]) + '\n' + str(sequences) + '\n')
 			if format == "prot":
 				if str(str(definition).split(" # ")[0].rsplit("_",1)[0]).replace(" ", "$~&").replace('"','^@%') in correct:
-					switch.write('>' + (str(definition).split(" # ")[0]+"_"+str(definition).split(" # ")[3].strip("~")).replace(" ", "$~&").replace('"','^@%') + '\n' + str(sequences) + '\n')
+					switch.write('>' + (str(definition).split(" # ")[0]).replace(" ", "$~&").replace('"','^@%') + '\n' + str(sequences) + '\n')
 
-with open(infile+'.strand_switch.faa', 'r') as switch:
-	switch_list = []
-	complete_list = []
-	for name, seq in SimpleFastaParser(switch):
-		complete_list.append(name.rsplit("_",2)[0])
-		complete_list.append(name.rsplit("_",2)[1])
-		complete_list.append(name.rsplit("_",2)[2])
-	complete_list.append("placeholder")
-	n = 0
-	genes = 0
-	strands = 0
-	strand_database = {}
-	while n < len(complete_list)-3:
-		if complete_list[n] == complete_list[n+3]:
-			genes += 1
-			if complete_list[n+2] != complete_list[n+5]:
-				strands += 1
-			n += 3
-		if complete_list[n] != complete_list[n+3]:
-			genes += 1
-			strand_database.update({complete_list[n]:[genes,strands]})
-			genes = 0
-			strands = 0
-			n += 3
-
-with open(infile+'.strand_switch.faa', 'r') as switch:
-	with open(infile+'.first_pass_low.faa', 'w') as low:
-		with open(infile+'.first_pass_mid.faa', 'w') as mid:
-			with open(infile+'.first_pass_high.faa', 'w') as high:
-				low_switch = []
-				mid_switch = []
-				high_switch = []
-				for name, seq in SimpleFastaParser(switch):
-					denominator = int(strand_database[name.rsplit("_",2)[0]][0])
-					numerator = int(strand_database[name.rsplit("_",2)[0]][1])
-					if numerator/denominator < 0.05:
-						low.write(">" + str(name.rsplit("_",1)[0]) + "\n" + str(seq) + "\n")
-						low_switch.append(name)
-					elif numerator/denominator < 0.35:
-						mid.write(">" + str(name.rsplit("_",1)[0]) + "\n" + str(seq) + "\n")
-						mid_switch.append(name)
-					elif numerator/denominator >= 0.35:
-						high.write(">" + str(name) + "\n" + str(seq) + "\n")
-						high_switch.append(name)
-
-if len(high_switch) > 0:
-	with open(infile+'.first_pass_high.faa', 'r') as high:
-		subprocess.call(['hmmsearch', '--tblout', infile+'.vpfam.hmmtbl', '--noali', '-T', '50', '--cpu', cpu, '-o', infile+'_temp.txt', vpfam_hmm, infile+'.first_pass_high.faa'])
-		with open(infile+'.vpfam.hmmtbl', 'r') as vpfam_infile:
-			with open(infile+'.vpfam.hmmtbl.temp.txt', 'w') as vpfam_outfile:
-				vpfam_outfile.write("protein" + "\t" + "id" + "\t" + "evalue" + "\t" + "score" + '\n')
-				for line in vpfam_infile:
-					if not line.startswith('#'):
-						line = line.split(' ')
-						parse = list(filter(None, line))
-						vpfam_outfile.write(str(parse[0]) + '\t' + str(parse[3]) + '\t' + str(parse[4]) + '\t' + str(parse[5]) + '\n')
-		subprocess.call(['rm', infile+'_temp.txt'])
-
-		with open(infile+'.vpfam.hmmtbl.temp.txt', 'r') as vpfam_sort:
-			with open(infile+'.vpfam.hmmtbl.parse.txt', 'w') as vpfam_table:
-				table = pd.read_csv(vpfam_sort, sep="\t")
-				sort = table.sort_values(by='evalue', ascending=True)
-				drop = sort.drop_duplicates(subset='protein', keep='first')
-				write = drop.to_csv(vpfam_table, index=False, sep="\t")
-		vpfam = infile+".vpfam.hmmtbl.parse.txt"
-		subprocess.call(['rm', infile+'.vpfam.hmmtbl.temp.txt'])
-
-##########################  Removing Bacteria  #################################
-	with open(vpfam, 'r') as vpfam:
-		n = 4
-		vpfam = vpfam.read().replace('\n','\t').split('\t')
-		if vpfam[-1] == '':
-			del vpfam[-1]
-		vpfam_list = []
-		while n < len(vpfam):
-			vpfam_list.append(str(vpfam[n].rsplit("_",2)[0]))
-			n += 4
-		vpfam_counts = list(set(vpfam_list))
-		vpfam_virus = []
-		for genome in vpfam_counts:
-			num_genes = vpfam_list.count(genome)
-			if num_genes > 0:
-				vpfam_virus.append(genome)
-
-########################### Generate New Database  #############################
-	with open(infile+'.first_pass_high.faa', 'r') as first_pass:
-		with open(infile+'.appended_high.faa', 'w') as appended:
-			counter = 0
-			for name, seq in SimpleFastaParser(first_pass):
-				if str(name.rsplit("_",2)[0]) in vpfam_virus:
-					appended.write(">" + str(name.rsplit("_",1)[0]) + "\n" + str(seq) + "\n")
-					counter += 1
-
-	if len(mid_switch) > 0 and counter > 0:
-		cat_file = str('cat ' + infile+'.appended_high.faa' + ' ' + infile+'.first_pass_mid.faa' + ' > ' + infile+'.first_pass.faa')
-		subprocess.run(cat_file, shell=True)
-		no_contigs = False
-	elif counter > 0:
-		subprocess.call(['mv', infile+'.appended_high.faa', infile+'.first_pass.faa'])
-		no_contigs = False
-	else:
-		no_contigs = True
-#######
-elif len(mid_switch) > 0:
-	subprocess.call(['mv', infile+'.first_pass_mid.faa', infile+'.first_pass.faa'])
-	no_contigs = False
-else:
-	no_contigs = True
-
-if no_contigs == False:
-############################### Run/Parse plasmid hmmsearch  #######################
-	subprocess.call(['hmmsearch', '--tblout', infile+'.plasmid.hmmtbl', '--noali', '-T', '50', '--cpu', cpu, '-o', infile+'_temp.txt', plasmid_hmm, infile+'.first_pass.faa'])
-	with open(infile+'.plasmid.hmmtbl', 'r') as plasmid_infile:
-		with open(infile+'.plasmid.hmmtbl.temp.txt', 'w') as plasmid_outfile:
-			plasmid_outfile.write("protein" + "\t" + "id" + "\t" + "evalue" + "\t" + "score" + '\n')
-			for line in plasmid_infile:
-				if not line.startswith('#'):
-					line = line.split(' ')
-					parse = list(filter(None, line))
-					plasmid_outfile.write(str(parse[0]) + '\t' + str(parse[3]) + '\t' + str(parse[4]) + '\t' + str(parse[5]) + '\n')
-	subprocess.call(['rm', infile+'_temp.txt'])
-
-	with open(infile+'.plasmid.hmmtbl.temp.txt', 'r') as plasmid_sort:
-		with open(infile+'.plasmid.hmmtbl.parse.txt', 'w') as plasmid_table:
-			table = pd.read_csv(plasmid_sort, sep="\t")
-			sort = table.sort_values(by='evalue', ascending=True)
-			drop = sort.drop_duplicates(subset='protein', keep='first')
-			write = drop.to_csv(plasmid_table, index=False, sep="\t")
-	plasmid = infile+".plasmid.hmmtbl.parse.txt"
-	subprocess.call(['rm', infile+'.plasmid.hmmtbl.temp.txt'])
-
-	##########################  Removing Bacteria  #################################
-	with open(plasmid, 'r') as plasmid:
-		n = 4
-		plasmid = plasmid.read().replace('\n','\t').split('\t')
-		if plasmid[-1] == '':
-			del plasmid[-1]
-		plasmid_list = []
-		while n < len(plasmid):
-			plasmid_list.append(str(plasmid[n].rsplit("_",2)[0]))
-			n += 4
-		plasmid_counts = list(set(plasmid_list))
-		bacteria = []
-		for genome in plasmid_counts:
-			num_genes = plasmid_list.count(genome)
-			if num_genes >= 3:
-				bacteria.append(genome)
-
-	########################### Generate New Database  #############################
-	with open(infile+'.first_pass.faa', 'r') as first_pass:
-		with open(infile+'.first_pass_mid-high.faa', 'w') as appended:
-			counter = 0
-			for name, seq in SimpleFastaParser(first_pass):
-				if str(name.rsplit("_",1)[0]) not in bacteria:
-					appended.write(">" + str(name) + "\n" + str(seq) + "\n")
-					counter += 1
-
-	if counter > 0 and len(low_switch) > 0:
-		cat_file = str('cat ' + infile+'.first_pass_low.faa' + ' ' + infile+'.first_pass_mid-high.faa' + ' > ' + infile+'.appended.faa')
-		subprocess.run(cat_file, shell=True)
-	elif counter == 0 and len(low_switch) > 0:
-		cat_file = str('mv ' + infile+'.first_pass_low.faa' + ' ' + infile+'.appended.faa')
-		subprocess.run(cat_file, shell=True)
-	elif counter > 0:
-		cat_file = str('mv ' + infile+'.first_pass_mid-high.faa' + ' ' + infile+'.appended.faa')
-		subprocess.run(cat_file, shell=True)
-	else:
-		subprocess.run('rm ' + infile+'*pass*faa 2> /dev/null', shell=True)
-		subprocess.run('rm ' + infile+'*appended*faa 2> /dev/null', shell=True)
-		exit()
-
-else:
-	if len(low_switch) == 0:
-		subprocess.run('rm ' + infile+'*pass*faa 2> /dev/null', shell=True)
-		subprocess.run('rm ' + infile+'*appended*faa 2> /dev/null', shell=True)
-		exit()
-	else:
-		subprocess.call(['mv', infile+'.first_pass_low.faa', infile+'.appended.faa'])
-
-rm_first_pass = 'rm '+infile+'.first_pass*.faa'
-subprocess.run(rm_first_pass, shell=True)
-subprocess.call(['rm', infile+'.strand_switch.faa'])
-
-########################### Generate Master File  ##############################
 with open(infile+'.appended.faa', 'r') as write_fasta:
 	with open(infile+'.master.txt', 'w') as master:
 		master.write("protein" + "\t" + "genome" + "\n")
-		counter = 0
 		for name, seq in SimpleFastaParser(write_fasta):
 			master.write(name + '\t' + str(name.rsplit("_",1)[0]) + '\n')
-			counter += 1
-if counter == 0:
-	subprocess.run('rm ' + infile+'*pass*faa 2> /dev/null', shell=True)
-	subprocess.run('rm ' + infile+'*appended*faa 2> /dev/null', shell=True)
-	exit()
 
 ###########################  Run/Parse KEGG hmmsearch ##########################
 subprocess.call(['hmmsearch', '--tblout', infile+'.KEGG.hmmtbl', '--noali', '-T', '40', '--cpu', cpu, '-o', infile+'_temp.txt', kegg_hmm, infile+'.appended.faa'])
@@ -1896,28 +1702,33 @@ with open(str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt', 'r') as t
 						AMG = ''
 						if annotations[n+2] != '':
 							ko_name = annotation_dict[annotations[n+2]]
-						else:
-							ko_name = ''
-						if annotations[n+6] != '':
-							pfam_name = annotation_dict[annotations[n+6]]
-						else:
-							pfam_name = ''
-						if annotations[n+10] != '':
-							vog_name = annotation_dict[annotations[n+10]]
-						else:
-							vog_name = ''
-						if annotations[n+2] != '':
+							k_score = float(annotations[n+4])
 							if annotations[n+2] in AMG_list:
 								AMG = 'AMG'
 								AMG_dict.update({str(annotations[n]):str(annotations[n+1]).replace("$~&", " ").replace('^@%','"') + '\t' + str(annotations[n+2]) + '\t' + str(ko_name) + '\t' + str(annotations[n+6]) + '\t' + str(pfam_name)})
+						else:
+							ko_name = ''
+							k_score = 0
+						if annotations[n+6] != '':
+							pfam_name = annotation_dict[annotations[n+6]]
+							p_score = float(annotations[n+8])
+						else:
+							pfam_name = ''
+							p_score = 0
+						if annotations[n+10] != '':
+							vog_name = annotation_dict[annotations[n+10]]
+							v_score = float(annotations[n+12])
+						else:
+							vog_name = ''
+							v_score = 0
 
-						if annotations[n+2] != '':
+						if k_score >= p_score and k_score >= v_score and k_score != 0:
 							genbank_dict_full.update({str(annotations[n]):str(annotations[n+1].replace("$~&", " ").replace('^@%','"'))+"\t"+str(annotations[n+2])+"\t"+str(ko_name)})
 							genbank_dict.update({str(annotations[n]):str(annotations[n+2])+"\t"+str(ko_name)})
-						elif annotations[n+10] != '':
+						elif v_score >= k_score and v_score >= p_score and v_score != 0:
 							genbank_dict_full.update({str(annotations[n]):str(annotations[n+1].replace("$~&", " ").replace('^@%','"'))+"\t"+str(annotations[n+10])+"\t"+str(vog_name)})
 							genbank_dict.update({str(annotations[n]):str(annotations[n+10])+"\t"+str(vog_name)})
-						elif annotations[n+6] != '':
+						elif p_score >= k_score and p_score >= v_score and p_score != 0:
 							genbank_dict_full.update({str(annotations[n]):str(annotations[n+1].replace("$~&", " ").replace('^@%','"'))+"\t"+str(annotations[n+6])+"\t"+str(pfam_name)})
 							genbank_dict.update({str(annotations[n]):str(annotations[n+6])+"\t"+str(pfam_name)})
 						else:
