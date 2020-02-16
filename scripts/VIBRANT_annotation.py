@@ -1703,9 +1703,6 @@ with open(str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt', 'r') as t
 						if annotations[n+2] != '':
 							ko_name = annotation_dict[annotations[n+2]]
 							k_score = float(annotations[n+4])
-							if annotations[n+2] in AMG_list:
-								AMG = 'AMG'
-								AMG_dict.update({str(annotations[n]):str(annotations[n+1]).replace("$~&", " ").replace('^@%','"') + '\t' + str(annotations[n+2]) + '\t' + str(ko_name) + '\t' + str(annotations[n+6]) + '\t' + str(pfam_name)})
 						else:
 							ko_name = ''
 							k_score = 0
@@ -1721,6 +1718,11 @@ with open(str(path)+'temp2_VIBRANT_annotations.' + str(base) + '.txt', 'r') as t
 						else:
 							vog_name = ''
 							v_score = 0
+
+						if annotations[n+2] != '':
+							if annotations[n+2] in AMG_list:
+								AMG = 'AMG'
+								AMG_dict.update({str(annotations[n]):str(annotations[n+1]).replace("$~&", " ").replace('^@%','"') + '\t' + str(annotations[n+2]) + '\t' + str(ko_name) + '\t' + str(annotations[n+6]) + '\t' + str(pfam_name)})
 
 						if k_score >= p_score and k_score >= v_score and k_score != 0:
 							genbank_dict_full.update({str(annotations[n]):str(annotations[n+1].replace("$~&", " ").replace('^@%','"'))+"\t"+str(annotations[n+2])+"\t"+str(ko_name)})
