@@ -18,7 +18,6 @@ VIBRANT v1.2.0
 If you find VIBRANT useful please consider citing our preprint on [bioRxiv](https://www.biorxiv.org/content/10.1101/855387v1):  
 Kieft, K., Zhou, Z., and Anantharaman, K. (2019). VIBRANT: Automated recovery, annotation and curation of microbial viruses, and evaluation of virome function from genomic sequences. BioRxiv 855387.  
 ______
-### Anaconda install for v1.2.0 updated March 8, 2020
 
 ## Updates for v1.2.0 (Feb 9 2020):  
 #### Summary:  
@@ -139,7 +138,7 @@ There are two different routes to downloading VIBRANT: [Anaconda](https://anacon
 * VIBRANT app: https://de.cyverse.org/de/?type=apps&app-id=c2864d3c-fd03-11e9-9cf4-008cfa5ae621&system-id=de
 * Information: https://wiki.cyverse.org/wiki/display/DEapps/VIBRANT-1.0.1
 
-### Anaconda (currently running v1.2.0, updated Mar 8 2020)  
+### Anaconda (currently running v1.2.0)  
 1) Install dependencies. See *Requirements* section above.
 2) Install directly to $PATH using bioconda.  
     `conda install -c bioconda vibrant==1.2.0`
