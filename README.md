@@ -137,7 +137,7 @@ There are two different routes to downloading VIBRANT: [Anaconda](https://anacon
 * VIBRANT app: https://de.cyverse.org/de/?type=apps&app-id=c2864d3c-fd03-11e9-9cf4-008cfa5ae621&system-id=de
 * Information: https://wiki.cyverse.org/wiki/display/DEapps/VIBRANT-1.0.1
 
-### Anaconda (currently running v1.2.0)  
+### Anaconda (currently running v1.2.0, updated Mar 8 2020)  
 1) Install dependencies. See *Requirements* section above.
 2) Install directly to $PATH using bioconda.  
     `conda install -c bioconda vibrant==1.2.0`
