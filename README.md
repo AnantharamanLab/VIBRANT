@@ -18,7 +18,7 @@ VIBRANT v1.2.0
 If you find VIBRANT useful please consider citing our preprint on [bioRxiv](https://www.biorxiv.org/content/10.1101/855387v1):  
 Kieft, K., Zhou, Z., and Anantharaman, K. (2019). VIBRANT: Automated recovery, annotation and curation of microbial viruses, and evaluation of virome function from genomic sequences. BioRxiv 855387.  
 ______
-### Anaconda install updated March 8, 2020
+### Anaconda install for v1.2.0 updated March 8, 2020
 
 ## Updates for v1.2.0 (Feb 9 2020):  
 #### Summary:  
