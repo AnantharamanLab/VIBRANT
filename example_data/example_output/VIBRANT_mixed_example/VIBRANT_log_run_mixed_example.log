@@ -1,0 +1,28 @@
+Command:  ../VIBRANT_run.py -i mixed_example.fasta -t 2 -folder example_output
+Date:     2020-03-16
+Start:    12:56:39
+End:      12:57:24
+Runtime:  0.8 minutes
+Program:  VIBRANT v1.2.1
+
+
+10 scaffolds were read in.
+7 scaffolds met minimum requirements: at least 1000bp and 4 ORFs.
+4 putative phages were identified.
+
+
+
+                                                               ##
+                                                             ##  ##
+                                                           ##      ##
+######   ##  ##     ##     #######   ######    #####       ##      ##
+##  ##   ##  ##   ##  ##   ##        ##       ##             ##  ##
+######   ######   ######   ##  ###   ######    ###             ##
+##       ##  ##   ##  ##   ##   ##   ##           ##           ##
+##       ##  ##   ##  ##   #######   ######   #####            ##
+                                                            #  ##  #
+                                                           # # ## # #
+                                                          #   #  #   #
+                                                         #            #
+
+
