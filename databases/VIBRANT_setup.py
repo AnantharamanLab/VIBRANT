@@ -1,9 +1,9 @@
 #! /usr/bin/env python3
 # Author: Kristopher Kieft, UW-Madison
 
-# VIBRANT v1.2.0
+# VIBRANT v1.2.1
 # Virus Identification By iteRative ANnoTation
-# Release date: Feb 9 2020
+# Release date: March 13 2020
 
 # Usage: $ python3 VIBRANT_setup.py
 
@@ -17,7 +17,7 @@ from io import StringIO
 import logging
 
 vibrant = argparse.ArgumentParser(description='Usage: python3 VIBRANT_setup.py.')
-vibrant.add_argument('--version', action='version', version='VIBRANT v1.2.0')
+vibrant.add_argument('--version', action='version', version='VIBRANT v1.2.1')
 vibrant.add_argument('-test', action='store_true', help='use this setting if you only want to test downloads/dependencies [default=off]')
 vibrant.add_argument('-force', action='store_true', help='use this setting if this script is exiting and telling you to install a package/program that you know is already installed [default=off]')
 args = vibrant.parse_args()
@@ -68,9 +68,9 @@ if args.test == False:
             exit()
 
     logging.info("Verifying Pfam, KEGG and VOG source websites are available for download ...")
-    c1 = subprocess.Popen("wget http://fileshare.csb.univie.ac.at/vog/vog94/vog.hmm.tar.gz --spider -nv --no-hsts -t 1", shell=True, stderr=PIPE)
-    c2 = subprocess.Popen("wget ftp://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam32.0/Pfam-A.hmm.gz --spider -nv --no-hsts -t 1", shell=True, stderr=PIPE)
-    c3 = subprocess.Popen("wget ftp://ftp.genome.jp/pub/db/kofam/archives/2019-08-10/profiles.tar.gz --spider -nv --no-hsts -t 1", shell=True, stderr=PIPE)
+    c1 = subprocess.Popen("wget http://fileshare.csb.univie.ac.at/vog/vog94/vog.hmm.tar.gz --spider -nv -t 1", shell=True, stderr=PIPE)
+    c2 = subprocess.Popen("wget ftp://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam32.0/Pfam-A.hmm.gz --spider -nv -t 1", shell=True, stderr=PIPE)
+    c3 = subprocess.Popen("wget ftp://ftp.genome.jp/pub/db/kofam/archives/2019-08-10/profiles.tar.gz --spider -nv -t 1", shell=True, stderr=PIPE)
     vog_out = c1.stderr.read()
     pfam_out = c2.stderr.read()
     kegg_out = c3.stderr.read()
@@ -96,9 +96,9 @@ if args.test == False:
 
     logging.info('')
     logging.info("Downloading HMM profiles for Pfam, KEGG and VOG from their source websites ...")
-    d1 = subprocess.Popen('wget http://fileshare.csb.univie.ac.at/vog/vog94/vog.hmm.tar.gz -q --no-hsts', shell=True)
-    d2 = subprocess.Popen('wget ftp://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam32.0/Pfam-A.hmm.gz -q --no-hsts', shell=True)
-    d3 = subprocess.Popen('wget ftp://ftp.genome.jp/pub/db/kofam/archives/2019-08-10/profiles.tar.gz -q --no-hsts', shell=True)
+    d1 = subprocess.Popen('wget http://fileshare.csb.univie.ac.at/vog/vog94/vog.hmm.tar.gz -q', shell=True)
+    d2 = subprocess.Popen('wget ftp://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam32.0/Pfam-A.hmm.gz -q', shell=True)
+    d3 = subprocess.Popen('wget ftp://ftp.genome.jp/pub/db/kofam/archives/2019-08-10/profiles.tar.gz -q', shell=True)
     d1.wait()
     d2.wait()
     d3.wait()
@@ -164,7 +164,7 @@ if args.test == False:
     #
 if args.test == True:
     print()
-    print("Verying correct dependency versions ...")
+    print("Verifying correct dependency versions ...")
     print("Logger started. Check log file for messages and errors.")
     print()
     logging.basicConfig(filename=str(parent_path) + '/databases/VIBRANT_test_setup.log', level=logging.INFO, format='%(message)s')
@@ -186,13 +186,15 @@ try:
     import seaborn as sns
     import numpy as np
     from collections import OrderedDict
-    import numpy as np
     from sklearn import preprocessing
     from sklearn.neural_network import MLPClassifier
     from sklearn.metrics import classification_report,confusion_matrix
     import pickle
     import os
     import sklearn
+    from sklearn.decomposition import PCA
+    import matplotlib.patches as mpatches
+    from matplotlib.lines import Line2D
 except Exception as e:
     logging.info("\n")
     logging.info("VIBRANT Error: Please install VIBRANT dependancy module(s). See below for the encountered error:")
@@ -270,11 +272,11 @@ if error > 0:
 
 if error == 0:
     logging.info('')
-    logging.info("VIBRANT v1.2.0 is good to go!")
+    logging.info("VIBRANT v1.2.1 is good to go!")
     logging.info('See example_data/ for quick test files.')
     logging.info('')
 
 print()
-print("VIBRANT v1.2.0 is good to go!")
+print("VIBRANT v1.2.1 is good to go!")
 print("See example_data/ for quick test files.")
 print()
