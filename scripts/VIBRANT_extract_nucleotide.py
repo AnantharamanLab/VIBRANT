@@ -1,9 +1,9 @@
 #! /usr/bin/env python3
 # Author: Kristopher Kieft, UW-Madison
 
-# VIBRANT v1.2.0
+# VIBRANT v1.2.1
 # Virus Identification By iteRative ANnoTation
-# Release date: Feb 9 2020
+# Release date: March 13 2020
 
 # Usage: see VIBRANT_run.py
 
