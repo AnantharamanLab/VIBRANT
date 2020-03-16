@@ -4,21 +4,57 @@
 ### Virus Identification By iteRative ANnoTation
 
 
-02/09/2020   
+03/13/2020   
 Kristopher Kieft  
 Anantharaman Lab  
 University of Wisconsin-Madison  
 kieft@wisc.edu  
 
 
-## Version
-VIBRANT v1.2.0  
+## Current Version
+VIBRANT v1.2.1  
 
 ## Citation
 If you find VIBRANT useful please consider citing our preprint on [bioRxiv](https://www.biorxiv.org/content/10.1101/855387v1):  
 Kieft, K., Zhou, Z., and Anantharaman, K. (2019). VIBRANT: Automated recovery, annotation and curation of microbial viruses, and evaluation of virome function from genomic sequences. BioRxiv 855387.  
+
 ______
 
+## Table of Contents:
+1. [Updates](#updates)
+    * **v1.2.1**
+    * v1.2.0
+    * v1.1.0
+    * v1.0.1
+2. [Program Description](#program)
+3. [Requirements](#require)
+    * Program Dependencies
+    * Python3 Dependencies
+4. [Running VIBRANT](#run)
+    * Quick Start
+    * Testing VIBRANT
+    * Arguments and Flags
+5. [Output Explanations](#out)
+    * Useful Outputs
+    * General Overview
+6. [VIBRANT Files and Folders](#ff)
+7. [Contact](#contact)
+
+
+______
+## Updates for v1.2.1 (Mar 13 2020): <a name="updates"></a>
+#### Summary:  
+* Note: predictions are identical to v1.2.0 and all data are 100% compatible (i.e., no change to true or false positive rate).  
+* Note: new version push to bioconda install in order to fix bug effecting some users (see issue below).  
+* Issue: resolved `name 'pfam_name' is not defined` issue from v1.2.0 causing some parallel runs to exit and data to be lost. This issue can also be identified by the presence of a file beginning with `temp2_`.  
+* Update: new output `phages_circular.fna` containing circular predicted viral sequences.  
+* Update: new output `integrated_prophage_coordinates.tsv` containing the scaffold coordinate locations of excised proviruses.  
+* Update: new figure `figure_PCA.pdf` displaying a summary PCA plot of predicted viruses (qualities, lifestyles, linear/circular, sizes and relationships).  
+* Update: new output `figure_PCA.tsv` containing the (x,y) coordinates of each predicted virus on the PCA plot.  
+* Update: new output `summary_normalized.tsv` is the normalized (to number of ORFs) version of `summary_results.tsv` and the information read into the neural network for classification. This is also the file used to generate the PCA plot.
+* Update: new outputs `log_run.log` and `log_annotation.log`. The file `log_run.log` represents the original log file and contains summary information from the run (command, runtime, date, virus identifications, etc.). Errors that cause VIBRANT to exit will be written to `log_run.log` or `log_annotation.log` depending on the origin of the error.  
+
+______
 ## Updates for v1.2.0 (Feb 9 2020):  
 #### Summary:  
 * Update: pre-filtration of scaffolds based on strand switching was completely removed. This modification was found to increase virus identification with a negligible effect on the rate of false positive discovery.  
@@ -26,8 +62,8 @@ ______
 * Note: results of virus identification may increase compared to previous versions.  
 
 ______
-#### Updates for v1.1.0 (Feb 7 2020):  
-##### Summary:  
+###### Updates for v1.1.0 (Feb 7 2020):  
+###### Summary:  
 * Issue: incorrect storage of strand switching information caused inconsistent results and potential decrease in virus recovery. Issue is now resolved.  
 * Update: modification of `hmmsearch` command to increase speed if using a newer version (version >= 3.2.1).  
 * Update: addition of `-folder` flag and compression of databases (`-d`) and files flags (`-m`).  
@@ -37,28 +73,28 @@ ______
 * Note: results of virus identification may vary compared to v1.0.1.  
 * Note: please verify Scikit-Learn and numpy versions. Incorrect versions may cause inconsistent and invalid results.  
 
-##### Explanations:  
+###### Explanations:  
 * Fixed a bug that was causing strand switching information to be stored with the wrong scaffolds. This caused scaffolds to undergo potentially incorrect pre-filtering (see flowchart and methods). Due to this issue, viral scaffolds may have been filtered out accidentally. This also led to inconsistent results between identical runs of VIBRANT because the same scaffold was given various strand switching information depending on the run. Both issues of incorrect strand switching and inconsistent results have been resolved.  
 * The usage of `hmmsearch --cpu` changed with newer versions of HMMER (version >= 3.2.1). For older versions the command used by VIBRANT is `--cpu 1` whereas newer versions `--cpu 0` is used. VIBRANT will automatically detect your version and use the appropriate command. This increases speed by optimizing cpu usage.  
 * The new `-folder` flag allows for the designation of an output directory to deposit the final VIBRANT output as well as all temporary files. When invoked this flag will create the new directory if it does not exist or add to the directory if it already exists. This may especially be useful when running VIBRANT on a shared computing cluster. The new `-d` and `-m` flags are useful if you have moved the location of the `databases/` and/or `files/` directories from their default location. Previously this required several flags that have now been condensed to two.  
 * The new `VIBRANT_setup.py` script generates additional messages for version control and it now does not require `VIBRANT_test_setup.py`. There is no need to re-run this script if you have ran it with a previous version. If you want to test dependencies/versions use `VIBRANT_setup.py -test`. It is suggested to run `VIBRANT_setup.py -test` to quickly verify correct setup.  
 * PF12761.7 was not given a name in `VIBRANT_names.tsv` and would cause errors if a protein was annotated with PF12761.7. This issue has been resolved.  
 ______
-#### Updates for v1.0.1 (outdated):  
-##### Summary:  
+###### Updates for v1.0.1:  
+###### Summary:  
 * Issue: some extracted proviruses were given the wrong genome sequence. Issue is now fixed.  
 * Update: minimum sequence length is now 1000bp which greatly increases virus identifications from some metagenomes.  
 * Update: metrics for quality analysis of scaffolds has been changed.  
 * Note: there is no need to re-download or re-compile the databases.  
 
-##### Explanations:  
+###### Explanations:  
 * Fixed a bug that was causing issues with extracting the correct genomic region of an integrated lysogenic virus (provirus). Briefly, the issue was causing some extracted proviruses (those with "*\_fragment\_#*" in the name) to have either the wrong genomic sequence or a sequence length of zero. The respective proteins and virus identification metrics for these scaffolds remains identical.  
 * The minimum scaffold length is now set to 1000bp (previous 3000bp). This greatly increases total virus identification within metagenomes that contain many sequences less than 3kb. This has no effect on false discovery since the minimum open reading frame requirement is still 4. For example, a 1kb and 3kb scaffold each encoding 4 open reading frames will be considered identically since neither sequence length nor sequence features impact virus identification.  
 * The quality analysis of scaffolds was updated. The category *fragment quality draft* was removed. The categories are now *complete circular*, *high*, *medium* and *low quality draft*. The update was made to better represent the completeness of *Caudovirales* scaffolds which are likely to be the most abundant viral population in a metagenome. Baseline tests indicate the new metrics linearly represent the completeness of *Caudovirales* genomes.  
 ______
 
 
-## Program Description
+## Program Description <a name="program"></a>
 
 VIBRANT is a tool for automated recovery and annotation of bacterial and archaeal viruses, determination of genome completeness, and characterization of viral community function from metagenomic assemblies. VIBRANT uses neural networks of protein annotation signatures and genomic features to maximize identification of highly diverse partial or complete viral genomes as well as excise integrated proviruses.  
 
@@ -78,14 +114,14 @@ VIBRANT uses three databases for identifying viruses and characterizing virome m
 * VOG (release 94): http://vogdb.org/     (FTP: http://fileshare.csb.univie.ac.at/vog/vog94/)  
 
 
-## Requirements  
+## Requirements <a name="require"></a>
 *System Requirements:* VIBRANT has been tested and successfully run on Mac, Linux and Ubuntu systems.  
 *Program Dependencies:* Python3, Prodigal, HMMER3, gzip, tar, wget (see section below)  
 *Python Dependencies:* BioPython, Pandas, Matplotlib, Seaborn, Numpy, Scikit-learn, Pickle (see section below)  
 
 Don't worry, these should all be easy and quick to install if you do not already have the requirements satisfied. Suggested methods of installation are with [1] pip (pip3) (https://pypi.org/project/pip/), [2] conda (https://anaconda.org/anaconda/conda), [3] homebrew (https://brew.sh/) or [4] apt (you make need to use 'apt-get' or 'sudo') (https://help.ubuntu.com/lts/serverguide/apt.html). The method will depend on your operating system and setup.  
 
-#### Program Dependencies: Installation  
+#### Program Dependencies: Installation
 Please ensure the following programs are installed and in your machine's PATH. Note: most downloads will automatically place these programs in your PATH.
 
 ##### Programs:  
@@ -105,13 +141,13 @@ Please ensure the following programs are installed and in your machine's PATH. N
 6. wget: you likely already have this installed or `brew install wget` or `apt install wget` or `pip install wget`
 
 
-#### Python3 Dependencies: Installation  
+#### Python3 Dependencies: Installation
 There are several Python3 dependencies that must be installed as well. You may already have some of these installed.
 
 ##### Packages  
 1. BioPython: https://biopython.org/wiki/Download
 2. Pandas: https://pandas.pydata.org/pandas-docs/stable/install.html
-3. Matplotlib: https://matplotlib.org/
+3. Matplotlib: https://matplotlib.org/  
 4. Seaborn: https://seaborn.pydata.org/
 5. Numpy: https://numpy.org/ (version >= 1.17.0)
 6. Scikit-learn: https://scikit-learn.org/stable/ (version == 0.21.3)
@@ -127,7 +163,7 @@ There are several Python3 dependencies that must be installed as well. You may a
 7. Pickle: this should already come with Python3. If you have issues try `pip install pickle-mixin`
 
 
-## Running VIBRANT
+## Running VIBRANT <a name="run"></a>
 
 VIBRANT is built for efficiently running on metagenomes but can also run on individual or small groups of genomes. Each scaffold is considered individually, so results will *not* vary whether the scaffold is run as part of a metagenome or by itself.  
 
@@ -145,7 +181,7 @@ There are two different routes to downloading VIBRANT: [Anaconda](https://anacon
 3) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires ~20GB of temporary storage space and ~11GB of final storage space. To do this, run `download-db.sh` which should be in your system's $PATH.  
     `download-db.sh`
 
-### GitHub (currently running v1.2.0)  
+### GitHub (currently running v1.2.1)  
 *Note:* if at any time you are given a "permission denied" error you can run `chmod 777 <file_name>` or `chmod -R 777 <folder_name>`. Simply repace `<file_name>` or `<folder_name>` with the file/folder that you would like to add permissions to.
 
 1) Install dependencies. See *Requirements* section above.
@@ -208,7 +244,7 @@ VIBRANT comes with a couple of very simple optional arguments. At any point you 
 * For `-d` and `-m` please specify the full path to the new location of the files. For example, `-d new_location/databases/`.  
 
 
-## Output Explanations  
+## Output Explanations  <a name="out"></a>
 VIBRANT outputs a lot of files and folders. Please see `output_explanations.pdf` within the parent folder for information regarding each file/folder that is generated by VIBRANT. Each file and folder will have a prefix or suffix respective to the name of the input file.  
 *Note:* some scaffolds will be proviruses that have been extracted from a host scaffold. These viral sequences will be given a new name. Specifically, the term "*\_fragment\_#*" will be appended to the name to indicate that it is a fragment of a larger scaffold. The number associated with the fragment is, for the most part, arbitrary.  
 
@@ -223,13 +259,13 @@ Note: integrated viruses that have been excised from a scaffold will have 'fragm
 Briefly, the folder `VIBRANT_phages_<input_file>` will contain FASTA, GenBank and list files for the identified viruses; the folder `VIBRANT_results_<input_file>` will contain annotation, metabolic and summary information for the identified viruses; the folders `VIBRANT_HMM_tables_parsed_<input_file>` and `VIBRANT_HMM_tables_unformatted_<input_file>` will contain raw HMM tables used for analyses; the folder `VIBRANT_figures_<input_file>` will contain summary figures for the dataset and identified viruses; the file `VIBRANT_log_<input_file>` will contain the log summary and run information. All outputs will be contained within a folder named `VIBRANT_<input_file>`.  
 
 
-## VIBRANT Files and Folders  
+## VIBRANT Files and Folders  <a name="ff"></a>
 
-VIBRANT comes with several folders, files and scripts that are used during analysis. You will not need to interact with any of these, but knowing what they contain may be useful. The folder `databases` contains two scripts (`VIBRANT_test_setup.py` and `VIBRANT_setup.py`) that are only used during initial setup of VIBRANT. There is also a folder `profile_names` that contains text files with lists of all HMM profiles used per database. The folder `example_data` has a standard setup for testing VIBRANT and validating the correct outputs. The folder `files` contains several very useful documents: `VIBRANT_AMGs.tsv` - list of all KEGG KOs designated as auxiliary metabolic genes (AMGs); `VIBRANT_categories.tsv` - list of accession numbers for VOG, KEGG and Pfam with their respective "v-score" which is an essential metric used to identify viruses; `VIBRANT_KEGG_pathways_summary.tsv` - list of KEGG map pathways, and their associated metabolic and KO information which is used to summarize virome metabolism; `VIBRANT_machine_model.sav` - the neural network model used for virus classification; `VIBRANT_names.tsv` - list of names associated with each VOG, KEGG and Pfam accession number. The folder `scripts` contains three auxiliary scripts used to run VIBRANT. The script `VIBRANT_run.py` within the parent folder is actually a wrapper script to faciliate parallelization of VIBRANT and perform final metric analyses, whereas the script `VIBRANT_annotation.py` is what does the real virus identification. The two scripts `VIBRANT_extract_nucleotide.py` and `VIBRANT_extract_protein.py` are used when splitting the input file for parallelization.
+VIBRANT comes with several folders, files and scripts that are used during analysis. You will not need to interact with any of these, but knowing what they contain may be useful. The folder `databases` contains `VIBRANT_setup.py` that is only used during initial setup of VIBRANT. There is also a folder `profile_names` that contains text files with lists of all HMM profiles used per database. The folder `example_data` has a standard setup for testing VIBRANT and validating the correct outputs. The folder `files` contains several very useful documents: `VIBRANT_AMGs.tsv` - list of all KEGG KOs designated as auxiliary metabolic genes (AMGs); `VIBRANT_categories.tsv` - list of accession numbers for VOG, KEGG and Pfam with their respective "v-score" which is an essential metric used to identify viruses; `VIBRANT_KEGG_pathways_summary.tsv` - list of KEGG map pathways, and their associated metabolic and KO information which is used to summarize virome metabolism; `VIBRANT_machine_model.sav` - the neural network model used for virus classification; `VIBRANT_names.tsv` - list of names associated with each VOG, KEGG and Pfam accession number. The folder `scripts` contains three auxiliary scripts used to run VIBRANT. The script `VIBRANT_run.py` within the parent folder is actually a wrapper script to facilitate parallelization of VIBRANT and perform final metric analyses, whereas the script `VIBRANT_annotation.py` is what does the real virus identification. The two scripts `VIBRANT_extract_nucleotide.py` and `VIBRANT_extract_protein.py` are used when splitting the input file for parallelization.
 
 
-## Contact
-Please contact Kristopher Kieft (kieft@wisc.edu) with any questions, concerns or comments.  
+## Contact <a name="contact"></a>
+Please contact Kristopher Kieft (kieft@wisc.edu or GitHub Issues) with any questions, concerns or comments.  
 
 Thank you for using VIBRANT!  
 
