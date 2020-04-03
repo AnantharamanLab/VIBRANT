@@ -40,7 +40,7 @@ ______
 6. [VIBRANT Files and Folders](#ff)
 7. [Contact](#contact)
 ______
-### Caution: issues have been identified regarding usage of VIBRANT via bioconda install. You may want to consider installing via GitHub clone to avoid these issues (Apr 3 2020).  
+### Caution: issues have been identified regarding usage of VIBRANT via bioconda install. Installing via GitHub clone will avoid these issues (Apr 3 2020).  
 ______
 ## Updates for v1.2.1 (Mar 13 2020): <a name="updates"></a>
 #### Summary:  
@@ -174,7 +174,7 @@ There are two different routes to downloading VIBRANT: [Anaconda](https://anacon
 * VIBRANT app: https://de.cyverse.org/de/?type=apps&app-id=c2864d3c-fd03-11e9-9cf4-008cfa5ae621&system-id=de
 * Information: https://wiki.cyverse.org/wiki/display/DEapps/VIBRANT-1.0.1
 
-### Anaconda (currently running v1.2.0)  
+### Anaconda (currently running v1.2.0)  CAUTION: issues have been noted for bioconda install, consider using GitHub
 1) Install dependencies. See *Requirements* section above.
 2) Install directly to $PATH using bioconda.  
     `conda install -c bioconda vibrant==1.2.0`
