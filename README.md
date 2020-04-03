@@ -39,8 +39,8 @@ ______
     * General Overview
 6. [VIBRANT Files and Folders](#ff)
 7. [Contact](#contact)
-
-
+______
+#### Caution: issues have been identified regarding usage of VIBRANT via bioconda install. You may want to consider installing via GitHub clone (Apr 3 2020).  
 ______
 ## Updates for v1.2.1 (Mar 13 2020): <a name="updates"></a>
 #### Summary:  
