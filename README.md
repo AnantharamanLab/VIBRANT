@@ -1,4 +1,4 @@
-## Caution: issues have been identified regarding usage of VIBRANT via bioconda install. Installing via GitHub clone will avoid these issues. The CyVerse app is currently down for conversion to v1.2.1 (Apr 3 2020). 
+### Caution: issues have been identified regarding usage of VIBRANT via bioconda install. Installing via GitHub clone will avoid these issues. The CyVerse app is currently down for conversion to v1.2.1 (Apr 3 2020). 
 
 ______
 
