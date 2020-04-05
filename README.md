@@ -1,7 +1,3 @@
-### Caution: issues have been identified regarding usage of VIBRANT via bioconda install. Installing via GitHub clone will avoid these issues. The CyVerse app is currently down for conversion to v1.2.1 (Apr 3 2020). 
-
-______
-
 <p align="center"> <img src="logo.png" height="300" /> </p>
 
 # **VIBRANT**
@@ -177,7 +173,7 @@ There are two different routes to downloading VIBRANT: [Anaconda](https://anacon
 * VIBRANT app: https://de.cyverse.org/de/?type=apps&app-id=c2864d3c-fd03-11e9-9cf4-008cfa5ae621&system-id=de
 * Information: https://wiki.cyverse.org/wiki/display/DEapps/VIBRANT-1.0.1
 
-### Anaconda (currently running v1.2.0)  CAUTION: issues have been noted for bioconda install, consider using GitHub
+### Anaconda (currently running v1.2.1)
 1) Install dependencies. See *Requirements* section above.
 2) Install directly to $PATH using bioconda.  
     `conda install -c bioconda vibrant==1.2.0`
