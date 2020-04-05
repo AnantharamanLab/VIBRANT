@@ -176,7 +176,7 @@ There are two different routes to downloading VIBRANT: [Anaconda](https://anacon
 ### Anaconda (currently running v1.2.1)
 1) Install dependencies. See *Requirements* section above.
 2) Install directly to $PATH using bioconda.  
-    `conda install -c bioconda vibrant==1.2.0`
+    `conda install -c bioconda vibrant==1.2.1`
 3) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires ~20GB of temporary storage space and ~11GB of final storage space. To do this, run `download-db.sh` which should be in your system's $PATH.  
     `download-db.sh`
 
