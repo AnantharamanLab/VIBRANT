@@ -42,6 +42,7 @@ ______
  
 ______
 ## Updates for v1.2.1 (Mar 13 2020): <a name="updates"></a>
+#### Apr 16 2020: updated v1.2.1 VIBRANT_run.py to resolve minor formatting issue with genbank (.gbk) output file
 #### Summary:  
 * Note: predictions are identical to v1.2.0 and all data are 100% compatible (i.e., no change to true or false positive rate).  
 * Note: new version push to bioconda install in order to fix bug effecting some users (see issue below).  
