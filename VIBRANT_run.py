@@ -524,7 +524,7 @@ try:
 				if len(seq) > 44:
 					sequence += str(seq[0:44])+"\n"
 					for group in range(44,len(seq),58):
-						sequence += '					 ' + str(seq[group:group+58]) + '\n'
+						sequence += '                     ' + str(seq[group:group+58]) + '\n'
 					sequence = sequence.rstrip("\n")
 				elif len(seq) <= 44:
 					sequence = seq
@@ -534,7 +534,7 @@ try:
 				strand = str(name.split("\t")[2])
 				accession = str(name.split("\t")[3])
 				name_split = str(name.split("\t")[4])
-				genbank_database.extend((protein,genome,location,strand,accession,name_split,str(sequence)))
+				genbank_database.extend((protein,genome,location,strand,accession,name_split,sequence))
 				#
 				if "_fragment_" in name:
 					rename = name.split("\t",1)[0]
@@ -571,8 +571,8 @@ try:
 				n = 0
 				count = 0
 				i = 61
-				spaces_database = '			   '
-				sequence = '		 1 '
+				spaces_database = '            '
+				sequence = '         1 '
 				for group in range(0,len(seq),10):
 					sequence += str(seq[group:group+10]) + ' '
 					count += 1
@@ -583,7 +583,7 @@ try:
 						sequence += '\n' + str(spaces) + str(i) + ' '
 						i += 60
 						count = 0
-				sequence_database.update({name:sequence})
+				sequence_database.update({name:str(sequence)})
 				db_dict_circ.update({name:seq})
 
 		with open(str(out_folder)+base + '.phages_combined.temp.gbk', 'w') as genbank:
@@ -596,7 +596,7 @@ try:
 						form = "circular"
 					else:
 						form = "linear"
-					genbank.write('//\nLOCUS	   ' + str(genbank_database[n]) + '				 ' + str(length_database[genbank_database[n]]) + ' bp	DNA	 ' + str(form) + '   VRL ' + str(date.today()) + '\nDEFINITION  ' + str(genbank_database[n]) + '.\nFEATURES			 Location/Qualifiers\n	 source		  /organism="' + str(genbank_database[n]) + '"\n')
+					genbank.write('//\nLOCUS       ' + str(genbank_database[n]) + '                 ' + str(length_database[genbank_database[n]]) + ' bp    DNA     ' + str(form) + '   VRL ' + str(date.today()) + '\nDEFINITION  ' + str(genbank_database[n]) + '.\nCOMMENT     Annotated using VIBRANT v1.2.1\nFEATURES             Location/Qualifiers\n     source          /organism="' + str(genbank_database[n]) + '"\n')
 					check = True
 				if "fragment" in str(genbank_database[n]):
 					if check == True:
@@ -605,17 +605,17 @@ try:
 						location = str(location_A) + ".." + str(location_B)
 						if str(genbank_database[n+2]) == "-1":
 							if str(genbank_database[n]) == str(genbank_database[n+7]):
-								genbank.write('	 CDS			 complement(' + str(location) + ')' + '\n					 /locus_tag="' + str(genbank_database[n-1]) + '"\n					 /protein_id="' + str(genbank_database[n+3]) + '"\n					 /product="' + str(genbank_database[n+4]) + '"\n					 /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             complement(' + str(location) + ')' + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
 							if str(genbank_database[n]) != str(genbank_database[n+7]):
-								genbank.write('	 CDS			 complement(' + str(location) + ')' + '\n					 /locus_tag="' + str(genbank_database[n-1]) + '"\n					 /protein_id="' + str(genbank_database[n+3]) + '"\n					 /product="' + str(genbank_database[n+4]) + '"\n					 /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             complement(' + str(location) + ')' + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
 								genbank.write('ORIGIN\n' + str(sequence_database[genbank_database[n]]) + '\n')
 								check = False
 								start_site = 0
 						elif str(genbank_database[n+2]) == "1":
 							if str(genbank_database[n]) == str(genbank_database[n+7]):
-								genbank.write('	 CDS			 ' + str(location) + '\n					 /locus_tag="' + str(genbank_database[n-1]) + '"\n					 /protein_id="' + str(genbank_database[n+3]) + '"\n					 /product="' + str(genbank_database[n+4]) + '"\n					 /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             ' + str(location) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
 							if str(genbank_database[n]) != str(genbank_database[n+7]):
-								genbank.write('	 CDS			 ' + str(location) + '\n					 /locus_tag="' + str(genbank_database[n-1]) + '"\n					 /protein_id="' + str(genbank_database[n+3]) + '"\n					 /product="' + str(genbank_database[n+4]) + '"\n					 /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             ' + str(location) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
 								genbank.write('ORIGIN\n' + str(sequence_database[genbank_database[n]]) + '\n')
 								check = False
 								start_site = 0
@@ -623,16 +623,16 @@ try:
 					if check == True:
 						if str(genbank_database[n+2]) == "-1":
 							if str(genbank_database[n]) == str(genbank_database[n+7]):
-								genbank.write('	 CDS			 complement' + str(genbank_database[n+1]) + '\n					 /locus_tag="' + str(genbank_database[n-1]) + '"\n					 /protein_id="' + str(genbank_database[n+3]) + '"\n					 /product="' + str(genbank_database[n+4]) + '"\n					 /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             complement' + str(genbank_database[n+1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
 							if str(genbank_database[n]) != str(genbank_database[n+7]):
-								genbank.write('	 CDS			 complement' + str(genbank_database[n+1]) + '\n					 /locus_tag="' + str(genbank_database[n-1]) + '"\n					 /protein_id="' + str(genbank_database[n+3]) + '"\n					 /product="' + str(genbank_database[n+4]) + '"\n					 /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             complement' + str(genbank_database[n+1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
 								genbank.write('ORIGIN\n' + str(sequence_database[genbank_database[n]]) + '\n')
 								check = False
 						elif str(genbank_database[n+2]) == "1":
 							if str(genbank_database[n]) == str(genbank_database[n+7]):
-								genbank.write('	 CDS			 ' + str(genbank_database[n+1][1:-1]) + '\n					 /locus_tag="' + str(genbank_database[n-1]) + '"\n					 /protein_id="' + str(genbank_database[n+3]) + '"\n					 /product="' + str(genbank_database[n+4]) + '"\n					 /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             ' + str(genbank_database[n+1][1:-1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
 							if str(genbank_database[n]) != str(genbank_database[n+7]):
-								genbank.write('	 CDS			 ' + str(genbank_database[n+1][1:-1]) + '\n					 /locus_tag="' + str(genbank_database[n-1]) + '"\n					 /protein_id="' + str(genbank_database[n+3]) + '"\n					 /product="' + str(genbank_database[n+4]) + '"\n					 /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             ' + str(genbank_database[n+1][1:-1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
 								genbank.write('ORIGIN\n' + str(sequence_database[genbank_database[n]]) + '\n')
 								check = False
 				n += 7
@@ -926,6 +926,8 @@ try:
 
 	subprocess.run("rm " + str(out_folder)+base + "_four-orf-count.txt 2>/dev/null", shell=True)
 	subprocess.run("rm " + str(out_folder)+base + "*parallel-runs* 2>/dev/null", shell=True)
+	if format == "prot":
+		subprocess.run('rm ' + str(out_folder)+base + '.phages_combined.gbk 2>/dev/null', shell=True)
 	move_phages = 'mv ' + str(out_folder)+base + '.phages_* ' + str(out_folder)+'VIBRANT_phages_'+base + ' 2>/dev/null'
 	move_run4 = str('mv '+str(out_folder)+'VIBRANT*' + base + '.tsv ' + str(out_folder)+'VIBRANT_results_' +base + ' 2>/dev/null')
 	move_figs = str('mv '+str(out_folder)+'VIBRANT_figure_*' + base + '.pdf ' + str(out_folder)+'VIBRANT_figures_' +base + ' 2>/dev/null')
@@ -985,8 +987,6 @@ try:
 		subprocess.run('mv ' + str(out_folder)+base + '.prodigal.ffn ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
 		subprocess.run('mv ' + str(out_folder)+base + '.prodigal.gff ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
 		subprocess.run('mv ' + str(out_folder)+base + '.prodigal.faa ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
-	if format == "prot":
-		subprocess.run('rm ' + str(out_folder)+base + '.phages_combined.gbk 2>/dev/null', shell=True)
 	subprocess.run('mv '+str(out_folder)+'VIBRANT*' + base + ' ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
 	subprocess.run('mv '+str(out_folder)+'VIBRANT*' + base + '.log ' + str(out_folder) + 'VIBRANT_' + base +' 2>/dev/null', shell=True)
 	time.sleep(0.1)
