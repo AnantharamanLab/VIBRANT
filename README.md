@@ -170,7 +170,7 @@ VIBRANT is built for efficiently running on metagenomes but can also run on indi
 ### Quick Start
 There are two different routes to downloading VIBRANT: [Anaconda](https://anaconda.org/bioconda/vibrant) install or [GitHub](https://github.com/AnantharamanLab/VIBRANT) clone/download. Alternatively you can use the [CyVerse Discovery Environment](https://de.cyverse.org/de/) open source web server.  
 
-### CyVerse (currently running v1.0.1)  
+### CyVerse (currently running v1.2.0)  
 * VIBRANT app: https://de.cyverse.org/de/?type=apps&app-id=c2864d3c-fd03-11e9-9cf4-008cfa5ae621&system-id=de
 * Information: https://wiki.cyverse.org/wiki/display/DEapps/VIBRANT-1.0.1
 
