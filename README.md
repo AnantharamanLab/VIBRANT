@@ -17,7 +17,7 @@ VIBRANT v1.2.1
 ## Citation
 If you find VIBRANT useful please consider citing our manuscript in [Microbiome](https://microbiomejournal.biomedcentral.com/articles/10.1186/s40168-020-00867-0):  
 Kieft, K., Zhou, Z. & Anantharaman, K. VIBRANT: automated recovery, annotation and curation of microbial viruses, and evaluation of viral community function from genomic sequences. Microbiome 8, 90 (2020).  
-
+ 
 ______
 
 ## Table of Contents:
