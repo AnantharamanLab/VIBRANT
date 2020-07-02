@@ -8,6 +8,8 @@
 # Usage: see VIBRANT_run.py
 
 ############################### Imports  #######################################
+import warnings
+warnings.filterwarnings("ignore")
 import sys
 import pandas as pd
 import argparse
