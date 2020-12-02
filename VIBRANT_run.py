@@ -4,6 +4,7 @@
 # VIBRANT v1.2.1
 # Virus Identification By iteRative ANnoTation
 # Release date: March 13 2020
+# Update date: December 2 2020
 
 # Usage: $ python3 VIBRANT_run.py -i <input_file> [options]
 
@@ -572,13 +573,13 @@ try:
 				count = 0
 				i = 61
 				spaces_database = '            '
-				sequence = '         1 '
+				sequence = '        1 '
 				for group in range(0,len(seq),10):
 					sequence += str(seq[group:group+10]) + ' '
 					count += 1
 					if count == 6:
 						length = list(str(i))
-						size = 9-len(length)
+						size = 8-len(length)
 						spaces = str(spaces_database[0:size+1])
 						sequence += '\n' + str(spaces) + str(i) + ' '
 						i += 60
@@ -596,7 +597,7 @@ try:
 						form = "circular"
 					else:
 						form = "linear"
-					genbank.write('//\nLOCUS       ' + str(genbank_database[n]) + '                 ' + str(length_database[genbank_database[n]]) + ' bp    DNA     ' + str(form) + '   VRL ' + str(date.today()) + '\nDEFINITION  ' + str(genbank_database[n]) + '.\nCOMMENT     Annotated using VIBRANT v1.2.1\nFEATURES             Location/Qualifiers\n     source          /organism="' + str(genbank_database[n]) + '"\n')
+					genbank.write('//\nLOCUS       ' + str(genbank_database[n]) + '               ' + str(length_database[genbank_database[n]]) + ' bp    DNA     ' + str(form) + ' VRL ' + str(date.today().strftime("%d-%b-%Y")) + '\nDEFINITION  ' + str(genbank_database[n]) + '.\nCOMMENT     Annotated using VIBRANT v1.2.1\nFEATURES             Location/Qualifiers\n     source          1..' + str(length_database[genbank_database[n]]) + '\n                     /organism="' + str(genbank_database[n]) + '"\n')
 					check = True
 				if "fragment" in str(genbank_database[n]):
 					if check == True:
@@ -605,17 +606,17 @@ try:
 						location = str(location_A) + ".." + str(location_B)
 						if str(genbank_database[n+2]) == "-1":
 							if str(genbank_database[n]) == str(genbank_database[n+7]):
-								genbank.write('     CDS             complement(' + str(location) + ')' + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             complement(' + str(location) + ')' + '\n                     /locus_tag="' + str(genbank_database[n-1]).replace('"','') + '"\n                     /protein_id="' + str(genbank_database[n+3]).replace('"','') + '"\n                     /product="' + str(genbank_database[n+4]).replace('"','') + '"\n                     /translation="' + str(genbank_database[n+5]).replace('"','') + '"\n')
 							if str(genbank_database[n]) != str(genbank_database[n+7]):
-								genbank.write('     CDS             complement(' + str(location) + ')' + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             complement(' + str(location) + ')' + '\n                     /locus_tag="' + str(genbank_database[n-1]).replace('"','') + '"\n                     /protein_id="' + str(genbank_database[n+3]).replace('"','') + '"\n                     /product="' + str(genbank_database[n+4]).replace('"','') + '"\n                     /translation="' + str(genbank_database[n+5]).replace('"','') + '"\n')
 								genbank.write('ORIGIN\n' + str(sequence_database[genbank_database[n]]) + '\n')
 								check = False
 								start_site = 0
 						elif str(genbank_database[n+2]) == "1":
 							if str(genbank_database[n]) == str(genbank_database[n+7]):
-								genbank.write('     CDS             ' + str(location) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             ' + str(location) + '\n                     /locus_tag="' + str(genbank_database[n-1]).replace('"','') + '"\n                     /protein_id="' + str(genbank_database[n+3]).replace('"','') + '"\n                     /product="' + str(genbank_database[n+4]).replace('"','') + '"\n                     /translation="' + str(genbank_database[n+5]).replace('"','') + '"\n')
 							if str(genbank_database[n]) != str(genbank_database[n+7]):
-								genbank.write('     CDS             ' + str(location) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             ' + str(location) + '\n                     /locus_tag="' + str(genbank_database[n-1]).replace('"','') + '"\n                     /protein_id="' + str(genbank_database[n+3]).replace('"','') + '"\n                     /product="' + str(genbank_database[n+4]).replace('"','') + '"\n                     /translation="' + str(genbank_database[n+5]).replace('"','') + '"\n')
 								genbank.write('ORIGIN\n' + str(sequence_database[genbank_database[n]]) + '\n')
 								check = False
 								start_site = 0
@@ -623,20 +624,20 @@ try:
 					if check == True:
 						if str(genbank_database[n+2]) == "-1":
 							if str(genbank_database[n]) == str(genbank_database[n+7]):
-								genbank.write('     CDS             complement' + str(genbank_database[n+1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             complement' + str(genbank_database[n+1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]).replace('"','') + '"\n                     /protein_id="' + str(genbank_database[n+3]).replace('"','') + '"\n                     /product="' + str(genbank_database[n+4]).replace('"','') + '"\n                     /translation="' + str(genbank_database[n+5]).replace('"','') + '"\n')
 							if str(genbank_database[n]) != str(genbank_database[n+7]):
-								genbank.write('     CDS             complement' + str(genbank_database[n+1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             complement' + str(genbank_database[n+1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]).replace('"','') + '"\n                     /protein_id="' + str(genbank_database[n+3]).replace('"','') + '"\n                     /product="' + str(genbank_database[n+4]).replace('"','') + '"\n                     /translation="' + str(genbank_database[n+5]).replace('"','') + '"\n')
 								genbank.write('ORIGIN\n' + str(sequence_database[genbank_database[n]]) + '\n')
 								check = False
 						elif str(genbank_database[n+2]) == "1":
 							if str(genbank_database[n]) == str(genbank_database[n+7]):
-								genbank.write('     CDS             ' + str(genbank_database[n+1][1:-1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             ' + str(genbank_database[n+1][1:-1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]).replace('"','') + '"\n                     /protein_id="' + str(genbank_database[n+3]).replace('"','') + '"\n                     /product="' + str(genbank_database[n+4]).replace('"','') + '"\n                     /translation="' + str(genbank_database[n+5]).replace('"','') + '"\n')
 							if str(genbank_database[n]) != str(genbank_database[n+7]):
-								genbank.write('     CDS             ' + str(genbank_database[n+1][1:-1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]) + '"\n                     /protein_id="' + str(genbank_database[n+3]) + '"\n                     /product="' + str(genbank_database[n+4]) + '"\n                     /translation="' + str(genbank_database[n+5]) + '"\n')
+								genbank.write('     CDS             ' + str(genbank_database[n+1][1:-1]) + '\n                     /locus_tag="' + str(genbank_database[n-1]).replace('"','') + '"\n                     /protein_id="' + str(genbank_database[n+3]).replace('"','') + '"\n                     /product="' + str(genbank_database[n+4]).replace('"','') + '"\n                     /translation="' + str(genbank_database[n+5]).replace('"','') + '"\n')
 								genbank.write('ORIGIN\n' + str(sequence_database[genbank_database[n]]) + '\n')
 								check = False
 				n += 7
-
+			genbank.write('//')
 
 	with open(str(files)+'VIBRANT_names.tsv', 'r') as names:
 		names = names.read().replace('\n','\t').split('\t')
