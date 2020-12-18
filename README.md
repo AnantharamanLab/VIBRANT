@@ -177,14 +177,14 @@ VIBRANT is built for efficiently running on metagenomes but can also run on indi
 ### Quick Start
 There are two different routes to downloading VIBRANT: [Anaconda](https://anaconda.org/bioconda/vibrant) install or [GitHub](https://github.com/AnantharamanLab/VIBRANT) clone/download. Alternatively you can use the [CyVerse Discovery Environment](https://de.cyverse.org/de/) open source web server.  
 
-### CyVerse (currently running v1.0.1)  
-* VIBRANT app: https://de.cyverse.org/de/?type=apps&app-id=c2864d3c-fd03-11e9-9cf4-008cfa5ae621&system-id=de
-* Information: https://wiki.cyverse.org/wiki/display/DEapps/VIBRANT-1.0.1
+### CyVerse (currently running v1.2.0)  
+* CyVerse: https://de.cyverse.org/de/
+* VIBRANT app: https://de.cyverse.org/de/?type=apps&app-id=fbbe8242-54fe-11ea-9ead-008cfa5ae621&system-id=de
 
-### Anaconda (currently running v1.2.0)  
+### Anaconda (currently running v1.2.1)  
 1) Install dependencies. See *Requirements* section above.
 2) Install directly to $PATH using bioconda.  
-    `conda install -c bioconda vibrant==1.2.0`
+    `conda install -c bioconda vibrant==1.2.1`
 3) Download and setup databases. This will take some time due to file sizes, but it only needs to be run once. This step requires ~20GB of temporary storage space and ~11GB of final storage space. To do this, run `download-db.sh` which should be in your system's $PATH.  
     `download-db.sh`
 
