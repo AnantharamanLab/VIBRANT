@@ -69,8 +69,8 @@ if args.test == False:
 
     logging.info("Verifying Pfam, KEGG and VOG source websites are available for download ...")
     c1 = subprocess.Popen("wget http://fileshare.csb.univie.ac.at/vog/vog94/vog.hmm.tar.gz --spider -nv -t 1", shell=True, stderr=PIPE)
-    c2 = subprocess.Popen("wget ftp://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam32.0/Pfam-A.hmm.gz --spider -nv -t 1", shell=True, stderr=PIPE)
-    c3 = subprocess.Popen("wget ftp://ftp.genome.jp/pub/db/kofam/archives/2019-08-10/profiles.tar.gz --spider -nv -t 1", shell=True, stderr=PIPE)
+    c2 = subprocess.Popen("wget https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam32.0/Pfam-A.hmm.gz --spider -nv -t 1", shell=True, stderr=PIPE)
+    c3 = subprocess.Popen("wget https://www.genome.jp/ftp/db/kofam/archives/2019-08-10/profiles.tar.gz --spider -nv -t 1", shell=True, stderr=PIPE)
     vog_out = c1.stderr.read()
     pfam_out = c2.stderr.read()
     kegg_out = c3.stderr.read()
